@@ -8,16 +8,31 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { UsuarioService } from 'src/services/usuario.service';
+import { AuthenticateService } from 'src/services/authenticate.service';
+import { AnuncioService } from 'src/services/anuncio.service';
+import { IonicStorageModule } from '@ionic/storage';
+import { GlobalParameters } from './config/global-parameters';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    IonicStorageModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    UsuarioService,
+    AuthenticateService,
+    AnuncioService,
+    GlobalParameters
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

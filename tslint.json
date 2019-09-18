@@ -3,9 +3,11 @@
   "rulesDirectory": [
     "codelyzer"
   ],
+  "no-trailing-whitespace": false,
   "rules": {
     "array-type": false,
     "arrow-parens": false,
+    "disable-next-line": "no-trailing-whitespace",
     "deprecation": {
       "severity": "warn"
     },

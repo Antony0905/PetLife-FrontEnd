@@ -1,0 +1,17 @@
+<ion-content padding>
+
+  <img src="../../assets/imgs/logo.jpg" alt="logo">
+
+  <form>
+    <ion-item>
+      <ion-label stacked>Email</ion-label>
+      <ion-input type="text" [(ngModel)]="auth.email" name="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label stacked>Senha</ion-label>
+      <ion-input type="password" [(ngModel)]="auth.password" name="password"></ion-input>
+    </ion-item>
+    <ion-button expand="block" (click)="login()">Entrar</ion-button>
+    <ion-button expand="block" (click)="register()" fill="outline">Registrar</ion-button>
+  </form>
+</ion-content>
