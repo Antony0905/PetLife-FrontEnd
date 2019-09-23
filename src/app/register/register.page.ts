@@ -12,11 +12,12 @@ import { delay } from 'q';
 })
 export class RegisterPage implements OnInit {
 
-  msgReturn: string = '';
+  msgReturn = '';
 
   dataFromService: any = '';
 
   user: UsuarioDTO = {
+    id: '',
     email: '',
     password: '',
     dataNascimento: new Date().toISOString(),

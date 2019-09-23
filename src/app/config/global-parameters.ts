@@ -6,17 +6,17 @@ export class GlobalParameters {
 
     constructor() { }
 
-    private auth: AuthenticateResponse;
+    public auth: AuthenticateResponse;
 
-    getUsuarioLogado() {
+    public getUsuarioLogado() {
         return this.auth;
     }
 
-    setUsuarioLogado(usuario) {
+    public setUsuarioLogado(usuario) {
         this.auth = usuario;
     }
 
-    removeUsuarioLogado() {
+    public removeUsuarioLogado() {
         this.auth = null;
     }
 

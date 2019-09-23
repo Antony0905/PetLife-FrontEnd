@@ -1,5 +1,7 @@
 {
   "name": "PetLife",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

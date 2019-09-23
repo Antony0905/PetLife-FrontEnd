@@ -1,11 +1,42 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Four
+      Perfil
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <h1> Bem vindo {{ nome }} :D</h1>
+  <ion-avatar>
+    <img src="../../assets/imgs/profile-default.png">
+  </ion-avatar>
   <ion-button expand="block" (click)="logout()">Logout</ion-button>
+
+
+  <ion-card *ngFor="let file of files | async">
+    <ion-card-header>
+      {{ file.created | date: 'medium'}}
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-button ion-button block icon-left outline (click)="viewFile(file.url)">
+        <ion-icon name="eye"></ion-icon>
+        {{file.fullPath}}
+      </ion-button>
+
+      <ion-button ion-button block icon-only outline color="danger" (click)="deleteFile(file)">
+        <ion-icon name="trash"></ion-icon>
+        {{file.fullPath}}
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-fab right bottom>
+    <ion-button ion-fab color="primary" (click)="addFile()">
+      <ion-icon name="cloud-upload"></ion-icon>
+    </ion-button>
+  </ion-fab>
+
 </ion-content>

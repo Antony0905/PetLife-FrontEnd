@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
       if (this.authResponse.authenticate) {
         console.log('Bem vindo ' + this.authResponse.nome);
         this.presentLoading();
-        this.logon();
+        this.logon(this.auth.email);
       } else {
         this.msgHeader = 'Authenticate Failure';
         this.msgBody = 'Usuário ou Senha inválidos!';
@@ -59,8 +59,8 @@ export class HomePage implements OnInit {
       });
   }
 
-  async logon() {
-    await setTimeout(() => { this.authService.login(); }, 2000);
+  async logon(userEmail: string) {
+    await setTimeout(() => { this.authService.login(userEmail); }, 2000);
   }
 
   register() {
