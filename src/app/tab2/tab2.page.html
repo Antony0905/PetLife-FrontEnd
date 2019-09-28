@@ -1,23 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Cadastrar Serviço
+      Serviços
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<img src="../../assets/imgs/servico.jpg" alt="logo">
-
-<form>
-  <ion-item>
-    <ion-input type="text" [(ngModel)]="anuncio.titulo" name="titulo" required placeholder="Titulo do Anuncio">
-    </ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-textarea type="text" [(ngModel)]="anuncio.descricao" name="descricao" required
-      placeholder="Descrição do Serviço"></ion-textarea>
-  </ion-item>
-  <ion-button (click)="cadastrarAnuncio()" expand="block">Cadastrar</ion-button>
-</form>
+<ion-fab-button (click)="pageServicos()" color="primary">
+  <ion-icon ios="ios-add" md="md-add"></ion-icon>
+</ion-fab-button>
 
 <ion-content></ion-content>

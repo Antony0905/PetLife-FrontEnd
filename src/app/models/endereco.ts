@@ -1,6 +1,4 @@
-export interface Anuncio {
-    titulo: string;
-    descricao: string;
+export interface Endereco {
     cep: string;
     logradouro: string;
     complemento: string;

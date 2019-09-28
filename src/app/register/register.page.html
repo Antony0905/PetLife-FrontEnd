@@ -1,7 +1,10 @@
 <ion-header>
-  <ion-buttons slot="start">
-    <ion-back-button></ion-back-button>
-  </ion-buttons>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 <ion-content padding>
 
@@ -13,14 +16,16 @@
     </ion-item>
     <ion-item>
       <ion-label>Data de Nascimento</ion-label>
-      <ion-datetime displayFormat="DD MM YY" [(ngModel)]="user.dataNascimento" name="dataNascimento" placeholder="DD MM YY">
+      <ion-datetime displayFormat="DD MM YY" [(ngModel)]="user.dataNascimento" name="dataNascimento"
+        placeholder="DD MM YY">
       </ion-datetime>
     </ion-item>
     <ion-item>
       <ion-input type="text" [(ngModel)]="user.email" name="email" required placeholder="E-mail"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="password" [(ngModel)]="user.password" name="password" required placeholder="Password"></ion-input>
+      <ion-input type="password" [(ngModel)]="user.password" name="password" required placeholder="Password">
+      </ion-input>
     </ion-item>
     <ion-button expand="block" (click)="registrar()">Registrar</ion-button>
   </form>

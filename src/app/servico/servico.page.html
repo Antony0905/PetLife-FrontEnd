@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title>Cadastra Novo Serviço</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <img src="../../assets/imgs/servico.jpg" alt="logo">
+
+  <form>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="anuncio.titulo" name="titulo" required placeholder="Titulo do Anuncio">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-textarea type="text" [(ngModel)]="anuncio.descricao" name="descricao" required
+        placeholder="Descrição do Serviço"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="anuncio.cep" name="cep" required placeholder="Titulo do Anuncio">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="anuncio.logradouro" name="logradouro" required placeholder="Titulo do Anuncio">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="anuncio.complemento" name="complemento" required placeholder="Titulo do Anuncio">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="anuncio.bairro" name="bairro" required placeholder="Titulo do Anuncio">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="anuncio.cidade" name="cidade" required placeholder="Titulo do Anuncio">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="anuncio.estado" name="estado" required placeholder="Titulo do Anuncio">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="anuncio.numero" name="numero" required placeholder="Titulo do Anuncio">
+      </ion-input>
+    </ion-item>
+
+    <ion-button (click)="cadastrarAnuncio()" expand="block">Cadastrar</ion-button>
+  </form>
+
+
+
+</ion-content>

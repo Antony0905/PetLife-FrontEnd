@@ -18,7 +18,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { UploadFileService } from './services/upload-file.service';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { CepService } from './services/cep.service';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCijbdvk9LitPTtDAlc1G90WH9kB-nl_zw',
@@ -52,7 +53,8 @@ const firebaseConfig = {
     AnuncioService,
     GlobalParameters,
     UploadFileService,
-    InAppBrowser
+    InAppBrowser,
+    CepService
   ],
   bootstrap: [AppComponent]
 })
