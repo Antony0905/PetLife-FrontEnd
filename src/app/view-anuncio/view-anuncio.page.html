@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title>View Anúncio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <ion-card>
+    <img src="../../assets/imgs/servico.jpg" />
+    <ion-card-header>
+      <ion-card-title> {{ anuncio.titulo }} </ion-card-title>
+    </ion-card-header>
+    <ion-card-content> {{ anuncio.descricao }} </ion-card-content>
+    <ion-button (click)="atualizarAnuncio(anuncio)" expand="block">Contratar</ion-button>
+  </ion-card>
+
+
+</ion-content>

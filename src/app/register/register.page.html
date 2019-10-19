@@ -27,6 +27,37 @@
       <ion-input type="password" [(ngModel)]="user.password" name="password" required placeholder="Password">
       </ion-input>
     </ion-item>
+
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="user.cep" name="cep" required placeholder="Cep">
+      </ion-input>
+      <ion-button (click)="buscarEndereco()" expand="block">Buscar</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" disabled="true" [(ngModel)]="user.logradouro" name="logradouro" required
+        placeholder="Logradouro">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="user.numero" name="numero" required placeholder="Nº">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="user.complemento" name="complemento" required placeholder="Complemento">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" disabled="true" [(ngModel)]="user.bairro" name="bairro" required placeholder="Bairro">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" disabled="true" [(ngModel)]="user.cidade" name="cidade" required placeholder="Cidade">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" disabled="true" [(ngModel)]="user.estado" name="estado" required placeholder="Estado">
+      </ion-input>
+    </ion-item>
     <ion-button expand="block" (click)="registrar()">Registrar</ion-button>
   </form>
 

@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
     password: ''
   };
 
-  authResponse: AuthenticateResponse;
+  public authResponse: AuthenticateResponse;
 
   constructor(
     public navCtrl: NavController,

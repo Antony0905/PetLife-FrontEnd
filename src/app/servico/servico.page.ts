@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Anuncio } from 'src/models/anuncio';
-import { NavController, AlertController, LoadingController } from '@ionic/angular';
+import { UsuarioDTO } from 'src/models/usuario.dto';
 import { AnuncioService } from 'src/services/anuncio.service';
-import { CepService } from '../services/cep.service';
-import { Endereco } from '../models/endereco';
+import { UsuarioService } from 'src/services/usuario.service';
+import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-servico',
@@ -17,41 +19,58 @@ export class ServicoPage implements OnInit {
     public anuncioService: AnuncioService,
     public alertController: AlertController,
     public loadingController: LoadingController,
-    public cepService: CepService) {
+    public authService: AuthenticationService,
+    public usuarioService: UsuarioService,
+    public router: Router
+  ) {
 
   }
 
-  anuncio: Anuncio = {
-    titulo: '',
-    descricao: '',
-    cep: '',
-    logradouro: '',
-    complemento: '',
-    bairro: '',
-    cidade: '',
-    estado: '',
-    numero: ''
-  };
+  anuncio = new Anuncio();
 
   msgReturn: string;
-  endereco: Endereco;
+  email: string;
+  usuario: UsuarioDTO;
 
+  ngOnInit() {
+
+  }
+
+  ionViewWillEnter() {
+    this.anuncio.titulo = '1';
+  }
 
   cadastrarAnuncio() {
 
-    this.anuncioService.novoAnuncio(this.anuncio)
-      .subscribe((response) => {
-        this.msgReturn = 'SUCESSO';
-        this.presentLoading();
-        console.log(response);
-        this.presentAlert(response);
+    this.authService.getUser().then((val) => {
+
+      this.email = val;
+      this.usuarioService.findUserByEmail(this.email).subscribe((response) => {
+
+        this.usuario = response;
+        this.anuncio.userId = this.usuario.id;
+
+        this.validateTitleAndPrice();
+
+        this.anuncioService.novoAnuncio(this.anuncio)
+          .subscribe((response2) => {
+            this.msgReturn = 'SUCESSO';
+            this.presentLoading();
+            console.log(response2);
+            this.presentAlert(response2);
+          },
+            error => {
+              this.msgReturn = 'ERROR';
+              this.presentLoading();
+              this.presentAlert(error.error);
+              console.log(error);
+            });
       },
         error => {
-          this.msgReturn = 'ERROR';
-          this.presentLoading();
-          this.presentAlert(error.error);
           console.log(error);
+          return null;
         });
+    });
 
   }
 
@@ -59,7 +78,12 @@ export class ServicoPage implements OnInit {
     const alert = await this.alertController.create({
       header: this.msgReturn,
       message: mensagem,
-      buttons: ['OK']
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['tabs/tabs/tab2']);
+        }
+      }]
     });
 
     await setTimeout(() => { alert.present(); }, 2000);
@@ -76,21 +100,35 @@ export class ServicoPage implements OnInit {
 
     console.log('Loading dismissed!');
   }
-  ionViewWillEnter() {
 
-    this.cepService.buscar('06867480').subscribe((response) => {
-      this.endereco = response;
-      console.log(this.endereco);
-    },
-      error => {
-        console.log(error);
-      });
+  validateTitleAndPrice() {
 
+    switch (this.anuncio.titulo) {
+      case '1': {
+        this.anuncio.titulo = 'Passeio de Pets';
+        this.anuncio.preco = '100.00';
+        break;
+      }
+      case '2': {
+        this.anuncio.titulo = 'Hospedagem de Pets';
+        this.anuncio.preco = '150.00';
+        break;
+      }
+      case '3': {
+        this.anuncio.titulo = 'Banho de Pets';
+        this.anuncio.preco = '50.00';
+        break;
+      }
+      case '4': {
+        this.anuncio.titulo = 'Tosa de Pets';
+        this.anuncio.preco = '50.00';
+        break;
+      }
+      default: {
+        break;
+      }
+    }
 
-  }
-
-
-  ngOnInit() {
   }
 
 }

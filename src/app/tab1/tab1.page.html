@@ -8,17 +8,18 @@
 
 <ion-content>
 
-  <ion-card *ngFor="let anuncio of anuncios">
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="../../assets/imgs/logo.jpg">
-      </ion-avatar>
-      <h2>{{anuncio.titulo}}</h2>
-      <h2 class="preco">R$ 50,00</h2>
-    </ion-item>
-    <ion-card-content>
-      <p>{{anuncio.descricao}}</p>
-    </ion-card-content>
-  </ion-card>
-
+  <div *ngFor="let anuncio of anuncios">
+    <ion-card (click)="viewAnuncio(anuncio)">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="../../assets/imgs/logo.jpg">
+        </ion-avatar>
+        <h2 class="h2-titulo-anuncio">{{anuncio.titulo}}</h2>
+        <h2 class="h2-preco">R$ {{anuncio.preco}}</h2>
+      </ion-item>
+      <ion-card-content>
+        <p>{{anuncio.descricao}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

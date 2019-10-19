@@ -11,23 +11,7 @@ export class CepService {
   constructor(private http: HttpClient) { }
 
   buscar(cep: string): Observable<Endereco> {
-    return this.http.get<Endereco>(`https://viacep.com.br/ws/${cep}/json/`
-      ,
-      {
-        headers: new HttpHeaders({
-          'content-Type': 'application/json'
-        })
-      });
+    return this.http.get<Endereco>(`https://viacep.com.br/ws/${cep}/json/`);
   }
 
-  private converterRespostaParaCep(cepNaResposta): Endereco {
-    this.endereco.cep = cepNaResposta.cep;
-    this.endereco.logradouro = cepNaResposta.logradouro;
-    this.endereco.complemento = cepNaResposta.complemento;
-    this.endereco.bairro = cepNaResposta.bairro;
-    this.endereco.cidade = cepNaResposta.localidade;
-    this.endereco.estado = cepNaResposta.uf;
-
-    return this.endereco;
-  }
 }

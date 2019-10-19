@@ -3,6 +3,18 @@
   overflow: hidden;
 }
 
-.preco{
+.h2-preco{
+  width: 150px;
+  text-align: right;
   color: green;
+}
+
+.h2-titulo-anuncio{
+  width: 100%;
+}
+
+ion-title{
+  background-color: #5c5ce8;
+  color: white;
+  font-weight: bold;
 }

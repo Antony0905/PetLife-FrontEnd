@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController } from '@ionic/angular';
-import { UsuarioService } from 'src/services/usuario.service';
-import { UsuarioDTO } from 'src/models/usuario.dto';
+import { LoadingController, NavController } from '@ionic/angular';
 import { AlertController } from '@Ionic/angular';
-import { delay } from 'q';
+import { UsuarioDTO } from 'src/models/usuario.dto';
+import { UsuarioService } from 'src/services/usuario.service';
+import { CepService } from '../services/cep.service';
+import { Endereco } from '../models/endereco';
 
 @Component({
   selector: 'app-register',
@@ -13,21 +14,15 @@ import { delay } from 'q';
 export class RegisterPage implements OnInit {
 
   msgReturn = '';
-
   dataFromService: any = '';
-
-  user: UsuarioDTO = {
-    id: '',
-    email: '',
-    password: '',
-    dataNascimento: new Date().toISOString(),
-    nome: ''
-  };
+  user = new UsuarioDTO();
+  endereco = new Endereco();
 
   constructor(
     public navCtrl: NavController,
     public usuarioService: UsuarioService,
     public alertController: AlertController,
+    public cepService: CepService,
     public loadingController: LoadingController) {
 
   }
@@ -37,12 +32,7 @@ export class RegisterPage implements OnInit {
 
   registrar() {
 
-    this.user.email = this.user.email;
-    this.user.nome = this.user.nome;
-    this.user.password = this.user.password;
-    this.user.dataNascimento = this.user.dataNascimento;
-
-
+    this.user.dataCadastro = new Date().toISOString();
     this.usuarioService.registrar(this.user)
       .subscribe((response) => {
         this.msgReturn = 'SUCESSO';
@@ -85,6 +75,30 @@ export class RegisterPage implements OnInit {
     const { role, data } = await loading.onDidDismiss();
 
     console.log('Loading dismissed!');
+  }
+
+  buscarEndereco() {
+    this.cepService.buscar(this.user.cep).subscribe((response) => {
+      this.endereco = response;
+      this.incluirEnderecoNoAnuncio(this.endereco);
+      console.log(this.endereco);
+    },
+      error => {
+        this.msgReturn = 'ERROR';
+        this.presentAlert('Não foi possível localizar o CEP informado ' + this.user.cep);
+        console.log(error);
+      });
+  }
+
+  incluirEnderecoNoAnuncio(endereco: Endereco) {
+
+    this.user.cep = this.endereco.cep;
+    this.user.bairro = this.endereco.bairro;
+    this.user.cidade = this.endereco.localidade;
+    this.user.complemento = this.endereco.complemento;
+    this.user.estado = this.endereco.uf;
+    this.user.logradouro = this.endereco.logradouro;
+
   }
 
 }

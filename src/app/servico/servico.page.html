@@ -6,7 +6,7 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-title>Cadastra Novo Serviço</ion-title>
+    <ion-title>Cadastrar Novo Serviço</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,42 +14,22 @@
   <img src="../../assets/imgs/servico.jpg" alt="logo">
 
   <form>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="anuncio.titulo" name="titulo" required placeholder="Titulo do Anuncio">
-      </ion-input>
-    </ion-item>
+    <ion-list>
+      <ion-list-header>Single Selection</ion-list-header>
+      <ion-item>
+        <ion-label>Título</ion-label>
+        <ion-select placeholder="Select One" [(ngModel)]="anuncio.titulo" name="anuncio.titulo">
+          <ion-select-option value="1">Passeio de Pets</ion-select-option>
+          <ion-select-option value="2">Hospedagem de Pets</ion-select-option>
+          <ion-select-option value="3">Banho de Pets</ion-select-option>
+          <ion-select-option value="4">Tosa de Pets</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+
     <ion-item>
       <ion-textarea type="text" [(ngModel)]="anuncio.descricao" name="descricao" required
         placeholder="Descrição do Serviço"></ion-textarea>
-    </ion-item>
-
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="anuncio.cep" name="cep" required placeholder="Titulo do Anuncio">
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="anuncio.logradouro" name="logradouro" required placeholder="Titulo do Anuncio">
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="anuncio.complemento" name="complemento" required placeholder="Titulo do Anuncio">
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="anuncio.bairro" name="bairro" required placeholder="Titulo do Anuncio">
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="anuncio.cidade" name="cidade" required placeholder="Titulo do Anuncio">
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="anuncio.estado" name="estado" required placeholder="Titulo do Anuncio">
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="anuncio.numero" name="numero" required placeholder="Titulo do Anuncio">
-      </ion-input>
     </ion-item>
 
     <ion-button (click)="cadastrarAnuncio()" expand="block">Cadastrar</ion-button>

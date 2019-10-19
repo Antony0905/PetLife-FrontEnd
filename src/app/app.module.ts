@@ -20,6 +20,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { UploadFileService } from './services/upload-file.service';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { CepService } from './services/cep.service';
+import { PetService } from './services/pet-service.service';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCijbdvk9LitPTtDAlc1G90WH9kB-nl_zw',
@@ -54,7 +55,8 @@ const firebaseConfig = {
     GlobalParameters,
     UploadFileService,
     InAppBrowser,
-    CepService
+    CepService,
+    PetService
   ],
   bootstrap: [AppComponent]
 })

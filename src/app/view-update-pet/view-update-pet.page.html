@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title>Informações Do Seu Pet</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <img src="../../assets/imgs/servico.jpg" />
+
+  <ion-card *ngIf="!showEdit">
+    <ion-card-header>
+      <ion-card-title> {{ pet.nome }} </ion-card-title>
+    </ion-card-header>
+    <ion-card-content> Raça: {{ pet.raca }} </ion-card-content>
+    <ion-card-content> Idade: {{ pet.idade }} </ion-card-content>
+    <ion-card-content> Peso: {{ pet.peso }} </ion-card-content>
+    <ion-card-content> Pedigree {{ pet.pedigree }} </ion-card-content>
+    <ion-card-content> Descrição: {{ pet.descricao }} </ion-card-content>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="showEditView()" expand="block">Editar</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="deletePet(pet.id)" expand="block" color="danger" ion-button full>Excluir
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+
+  <form *ngIf="showEdit">
+
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="pet.nome" name="nome" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="pet.raca" name="raca" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="pet.idade" name="idade" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="pet.peso" name="peso" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="pet.pedigree" name="pedigree" required>
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="pet.descricao" name="descricao" required>
+      </ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="dismissEditView()" color="danger" expand="block">Cancelar</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="atualizarPet()" color="primary" expand="block">Atualizar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

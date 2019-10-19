@@ -1,25 +1,31 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Pets
+      Meus Pets
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
+<ion-fab-button (click)="pageServicos()" color="primary">
+  <ion-icon ios="ios-add" md="md-add"></ion-icon>
+</ion-fab-button>
+
 <ion-content>
 
-  <h1>Nenhum pet cadastrado ...</h1>
+  <img src="../../assets/imgs/pet-cachorro.jpg" />
 
-  <ion-fab>
-    <ion-fab-button>Button</ion-fab-button>
-  </ion-fab>
+  <div *ngFor="let pet of pets">
+    <ion-card>
+      <ion-item (click)="viewOrUpdatePet(pet)">
+        <ion-avatar slot="start">
+          <img src="../../assets/imgs/logo.jpg">
+        </ion-avatar>
+        <h2 class="h2-titulo-anuncio">{{pet.nome}}</h2>
+      </ion-item>
+      <ion-card-content>
+        <p>{{pet.descricao}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
-  <ion-row>
-    <ion-col width-50 style="text-align: right">
-      <button ion-button>TEST</button>
-    </ion-col>
-    <ion-col width-50 style="text-align: left">
-      <button ion-button>TEST</button>
-    </ion-col>
-  </ion-row>
 </ion-content>

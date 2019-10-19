@@ -33,4 +33,8 @@ export class UsuarioService {
             });
     }
 
+    findUser(email: string): Observable<UsuarioDTO> {
+        return this.findUserByEmail(email);
+    }
+
 }

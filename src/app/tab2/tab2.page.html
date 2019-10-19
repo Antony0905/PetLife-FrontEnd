@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Serviços
+      Meus Anúncios
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,4 +10,22 @@
   <ion-icon ios="ios-add" md="md-add"></ion-icon>
 </ion-fab-button>
 
-<ion-content></ion-content>
+<ion-content>
+
+  <img src="../../assets/imgs/servicos.jpg" />
+
+  <div *ngFor="let anuncio of anuncios">
+    <ion-card>
+      <ion-item (click)="viewOrUpdateAnuncio(anuncio)">
+        <ion-avatar slot="start">
+          <img src="../../assets/imgs/logo.jpg">
+        </ion-avatar>
+        <h2 class="h2-titulo-anuncio">{{anuncio.titulo}}</h2>
+        <h2 class="h2-preco">R$ {{anuncio.preco}}</h2>
+      </ion-item>
+      <ion-card-content>
+        <p>{{anuncio.descricao}}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

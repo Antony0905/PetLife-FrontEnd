@@ -1,0 +1,25 @@
+ion-title{
+    background-color: #5c5ce8;
+    color: white;
+    font-weight: bold;
+}
+
+on-fab-button{
+    margin-left: 1000px;
+}
+
+ion-fab-button{
+    margin: 0 auto;
+    position: absolute;
+    left: 25%;
+    right: 25%;
+    z-index: 40;
+    display: block;
+    bottom: 20px;
+}
+
+.h2-titulo-anuncio{
+    width: 100%;
+    text-align: center;
+    margin-right: 10%;
+}

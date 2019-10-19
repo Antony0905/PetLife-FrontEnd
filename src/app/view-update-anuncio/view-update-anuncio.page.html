@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-title>Anuncio</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <img src="../../assets/imgs/servicos.jpg" />
+
+  <ion-card *ngIf="!showEdit">
+    <ion-card-header>
+      <ion-card-title> {{ anuncio.titulo }} </ion-card-title>
+    </ion-card-header>
+    <ion-card-content> {{ anuncio.descricao }} </ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="showEditView()" expand="block">Editar</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="deleteAnuncio(anuncio.id)" expand="block" color="danger" ion-button full>Excluir
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+
+  <form *ngIf="showEdit">
+    <ion-list>
+      <ion-list-header>Single Selection</ion-list-header>
+      <ion-item>
+        <ion-label>Título</ion-label>
+        <ion-select [(ngModel)]="anuncio.titulo" name="anuncio.titulo">
+          <ion-select-option selected value="1">Passeio de Pets</ion-select-option>
+          <ion-select-option value="2">Hospedagem de Pets</ion-select-option>
+          <ion-select-option value="3">Banho de Pets</ion-select-option>
+          <ion-select-option value="4">Tosa de Pets</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="anuncio.descricao" name="descricao" required>
+      </ion-input>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="dismissEditView()" color="danger" expand="block">Cancelar</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="atualizarAnuncio()" color="primary" expand="block">Atualizar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+</ion-content>
