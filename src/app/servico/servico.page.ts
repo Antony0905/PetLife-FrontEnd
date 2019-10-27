@@ -6,6 +6,7 @@ import { AnuncioService } from 'src/services/anuncio.service';
 import { UsuarioService } from 'src/services/usuario.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-servico',
@@ -32,12 +33,34 @@ export class ServicoPage implements OnInit {
   email: string;
   usuario: UsuarioDTO;
 
+  public dias = [
+    { val: 'Segunda', isChecked: false },
+    { val: 'Terça', isChecked: false },
+    { val: 'Quarta', isChecked: false },
+    { val: 'Quinta', isChecked: false },
+    { val: 'Sexta', isChecked: false },
+    { val: 'Sabado', isChecked: false },
+    { val: 'Domingo', isChecked: false }
+  ];
+
+  horario1: string;
+  horario2: string;
+  horario3: string;
+  tempoAnuncio: string;
+
+  checkValue(event) {
+    this.tempoAnuncio = event.detail.value;
+  }
+
   ngOnInit() {
 
   }
 
   ionViewWillEnter() {
     this.anuncio.titulo = '1';
+    this.horario1 = '';
+    this.horario2 = '';
+    this.horario3 = '';
   }
 
   cadastrarAnuncio() {
@@ -49,9 +72,11 @@ export class ServicoPage implements OnInit {
 
         this.usuario = response;
         this.anuncio.userId = this.usuario.id;
+        this.anuncio.expirationTime = this.tempoAnuncio;
 
+        this.validateHours();
+        this.validateDays();
         this.validateTitleAndPrice();
-
         this.anuncioService.novoAnuncio(this.anuncio)
           .subscribe((response2) => {
             this.msgReturn = 'SUCESSO';
@@ -71,6 +96,83 @@ export class ServicoPage implements OnInit {
           return null;
         });
     });
+
+  }
+  validateDays() {
+
+    this.anuncio.segunda = 'false';
+    this.anuncio.terca = 'false';
+    this.anuncio.quarta = 'false';
+    this.anuncio.quinta = 'false';
+    this.anuncio.sexta = 'false';
+    this.anuncio.sabado = 'false';
+    this.anuncio.domingo = 'false';
+
+    this.dias.forEach(element => {
+
+      if (element.isChecked) {
+
+        switch (element.val) {
+          case 'Segunda':
+            this.anuncio.segunda = 'true';
+            break;
+          case 'Terça':
+            this.anuncio.terca = 'true';
+            break;
+          case 'Quarta':
+            this.anuncio.quarta = 'true';
+            break;
+          case 'Quinta':
+            this.anuncio.quinta = 'true';
+            break;
+          case 'Sexta':
+            this.anuncio.sexta = 'true';
+            break;
+          case 'Sabado':
+            this.anuncio.sabado = 'true';
+            break;
+          case 'Domingo':
+            this.anuncio.domingo = 'true';
+            break;
+
+          default:
+            break;
+        }
+
+      }
+
+    });
+  }
+
+  validateHours() {
+
+    if (this.horario1 !== '') {
+      this.horario1 = moment(this.horario1).format('HH');
+    }
+
+    if (this.horario2 !== '') {
+      this.horario2 = moment(this.horario2).format('HH');
+    }
+
+    if (this.horario3 !== '') {
+      this.horario3 = moment(this.horario3).format('HH');
+    }
+
+    if (this.horario1 === this.horario2) {
+      this.horario2 = '';
+    }
+
+    if (this.horario1 === this.horario3) {
+      this.horario3 = '';
+    }
+
+    if (this.horario2 === this.horario3) {
+      this.horario3 = '';
+    }
+
+    this.anuncio.horario1 = this.horario1;
+    this.anuncio.horario2 = this.horario2;
+    this.anuncio.horario3 = this.horario3;
 
   }
 

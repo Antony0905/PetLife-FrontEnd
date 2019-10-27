@@ -17,6 +17,7 @@ export class PetService {
 
   savePet(pet: Pet) {
 
+    console.log(pet);
     return this.http.post(`${API_CONFIG.baseUrl}/savePet`
       , pet);
   }

@@ -11,12 +11,6 @@ ion-fab-button{
     bottom: 20px;
 }
 
-ion-title{
-    background-color: #5c5ce8;
-    color: white;
-    font-weight: bold;
-}
-
 .h2-preco{
     width: 150px;
     text-align: right;
@@ -26,3 +20,9 @@ ion-title{
 .h2-titulo-anuncio{
     width: 100%;
 }
+
+ion-title {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+  }

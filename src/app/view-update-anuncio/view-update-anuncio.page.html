@@ -5,7 +5,7 @@
       <ion-back-button color="danger"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>Anuncio</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,6 +13,8 @@
 <ion-content>
 
   <img src="../../assets/imgs/servicos.jpg" />
+
+  <h1 *ngIf="!isActive">ANUNCIO DESATIVADO</h1>
 
   <ion-card *ngIf="!showEdit">
     <ion-card-header>

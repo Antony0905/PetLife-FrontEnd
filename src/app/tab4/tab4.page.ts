@@ -28,12 +28,7 @@ export class Tab4Page {
     public authService: AuthenticationService,
     public parameters: GlobalParameters,
     public usuarioService: UsuarioService,
-    private uploadFileService: UploadFileService,
-    private alertCtrl: AlertController,
-    private toastCtrl: ToastController,
-    private iab: InAppBrowser
   ) {
-    this.files = this.uploadFileService.getFiles();
   }
 
   ionViewWillEnter() {
@@ -53,59 +48,6 @@ export class Tab4Page {
     });
   }
 
-  async addFile() {
-    let inputAlert = this.alertCtrl.create({
-      inputs: [
-        {
-          name: 'info',
-          placeholder: 'Lorem Ipsum'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Store',
-          handler: data => {
-            this.uploadInformation(data.info);
-          }
-        }
-      ]
-    });
-    (await inputAlert).present();
-  }
-
-  uploadInformation(text) {
-
-    let upload = this.uploadFileService.uploadToStorage(text);
-
-    upload.then().then(res => {
-      console.log('res: ' + res);
-      this.uploadFileService.storageInfoDataBase(res.metadata).then(async () => {
-        let toast = this.toastCtrl.create({
-          message: 'New file added!',
-          duration: 3000
-        });
-        (await toast).present();
-      });
-    });
-  }
-
-  deleteFile(file) {
-    this.uploadFileService.delteFile(file).subscribe(async () => {
-      let toast = this.toastCtrl.create({
-        message: 'File removed!',
-        duration: 3000
-      });
-      (await toast).present();
-    });
-  }
-
-  viewFile(url) {
-    this.iab.create(url);
-  }
 
   logout() {
     this.authService.logout();

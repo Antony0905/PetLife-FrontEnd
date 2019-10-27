@@ -5,20 +5,127 @@
       <ion-back-button color="danger"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar>
-    <ion-title>View Anúncio</ion-title>
+  <ion-toolbar color="tertiary">
+    <ion-title>Anúncio</ion-title>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content fullscreen>
   <ion-card>
     <img src="../../assets/imgs/servico.jpg" />
-    <ion-card-header>
-      <ion-card-title> {{ anuncio.titulo }} </ion-card-title>
-    </ion-card-header>
-    <ion-card-content> {{ anuncio.descricao }} </ion-card-content>
-    <ion-button (click)="atualizarAnuncio(anuncio)" expand="block">Contratar</ion-button>
-  </ion-card>
+    <ion-item>
+      <ion-card-header class="userAnunName">
+        <h4>{{usuarioAnunciante.nome}}</h4>
+      </ion-card-header>
+      <div class="stars">
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+        <ion-icon name="star"></ion-icon>
+      </div>
+    </ion-item>
+    <ion-item>
+      <ion-card-header>
+        <ion-card-title> {{ anuncio.titulo }} </ion-card-title>
+      </ion-card-header>
+      <h1 class="preco">R$ {{ preco }}</h1>
+    </ion-item>
+    <ion-item>
+      <ion-card-content> {{ anuncio.descricao }} </ion-card-content>
+    </ion-item>
+    <ion-list (ionChange)="checkDays($event)">
+      <ion-list-header>
+        <ion-label>Dias disponíveis</ion-label>
+      </ion-list-header>
+      <ion-item *ngIf="anuncio.segunda === 'true'">
+        <ion-checkbox color="primary" [(ngModel)]="agenda.segunda" name="{{agenda.segunda}}"></ion-checkbox>
+        <ion-label>Segunda</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.terca === 'true'">
+        <ion-checkbox color="primary" [(ngModel)]="agenda.terca" name="{{agenda.terca}}"></ion-checkbox>
+        <ion-label>Terça</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.quarta === 'true'">
+        <ion-checkbox color="primary" [(ngModel)]="agenda.quarta" name="{{agenda.quarta}}"></ion-checkbox>
+        <ion-label>Quarta</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.quinta === 'true'">
+        <ion-checkbox color="primary" [(ngModel)]="agenda.quinta" name="{{agenda.quinta}}"></ion-checkbox>
+        <ion-label>Quinta</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.sexta === 'true'">
+        <ion-checkbox color="primary" [(ngModel)]="agenda.sexta" name="{{agenda.sexta}}"></ion-checkbox>
+        <ion-label>Sexta</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.sabado === 'true'">
+        <ion-checkbox color="primary" [(ngModel)]="agenda.sabado" name="{{agenda.sabado}}"></ion-checkbox>
+        <ion-label>Sábado</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.domingo === 'true'">
+        <ion-checkbox color="primary" [(ngModel)]="agenda.domingo" name="{{agenda.domingo}}"></ion-checkbox>
+        <ion-label>Domingo</ion-label>
+      </ion-item>
+    </ion-list>
 
+    <ion-list>
+      <ion-radio-group (ionChange)="checkValue($event)">
+        <ion-list-header>
+          <ion-label>Horarios disponíveis</ion-label>
+        </ion-list-header>
+
+        <ion-item *ngIf="anuncio.horario1 !== ''">
+          <ion-label>{{anuncio.horario1}} hrs</ion-label>
+          <ion-radio slot="start" value="{{anuncio.horario1}}"></ion-radio>
+        </ion-item>
+
+        <ion-item *ngIf="anuncio.horario2 !== ''">
+          <ion-label>{{anuncio.horario2}} hrs</ion-label>
+          <ion-radio slot="start" value="{{anuncio.horario2}}"></ion-radio>
+        </ion-item>
+
+        <ion-item *ngIf="anuncio.horario3 !== ''">
+          <ion-label>{{anuncio.horario3}} hrs</ion-label>
+          <ion-radio slot="start" value="{{anuncio.horario3}}"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-list>
+      <ion-radio-group (ionChange)="checkPet($event)">
+        <ion-list-header>
+          <ion-label>Selecione o seu Pet</ion-label>
+        </ion-list-header>
+
+        <ion-item *ngFor="let pet of pets">
+          <ion-label>{{pet.nome}}</ion-label>
+          <ion-icon name="paw"></ion-icon>
+          <ion-radio slot="start" value="{{pet.id}}"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-list>
+      <ion-radio-group (ionChange)="checkPayment($event)">
+        <ion-list-header>
+          <ion-label>Selecione a forma de pagamento</ion-label>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>Pagamento em Dinheiro</ion-label>
+          <ion-icon name="cash"></ion-icon>
+          <ion-radio slot="start" value="dinheiro"></ion-radio>
+        </ion-item>
+
+        <ion-item disabled="true">
+          <ion-label>Cartão de Crédito</ion-label>
+          <ion-icon name="card"></ion-icon>
+          <ion-radio slot="start" value="credito"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-button (click)="cadastrarAgenda()" expand="block">Contratar</ion-button>
+  </ion-card>
 
 </ion-content>

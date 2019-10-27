@@ -9,7 +9,6 @@
     <ion-title>Cadastrar Novo Serviço</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
   <img src="../../assets/imgs/servico.jpg" alt="logo">
 
@@ -31,6 +30,57 @@
       <ion-textarea type="text" [(ngModel)]="anuncio.descricao" name="descricao" required
         placeholder="Descrição do Serviço"></ion-textarea>
     </ion-item>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Selecione os dias que possui disponibilidade</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let dia of dias">
+        <ion-checkbox color="primary" [(ngModel)]="dia.isChecked" name="{{dia.val}}"></ion-checkbox>
+        <ion-label>{{dia.val}}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Selecione até 3 horários diferentes que deseja iniciar as atividades, lembrando que o tempo médio por serviço é de 1 hora.</ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Primeiro Horário</ion-label>
+        <ion-datetime displayFormat="HH" [(ngModel)]="horario1" name="horario1"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Segundo Horário</ion-label>
+        <ion-datetime displayFormat="HH" [(ngModel)]="horario2" name="horario2"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Terceiro Horário</ion-label>
+        <ion-datetime displayFormat="HH" [(ngModel)]="horario3" name="horario3"></ion-datetime>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-radio-group (ionChange)="checkValue($event)">
+        <ion-list-header>
+          <ion-label>Por quando tempo você deseja que o anúncio esteja disponível?</ion-label>
+        </ion-list-header>
+
+        <ion-item>
+          <ion-label>30 Dias</ion-label>
+          <ion-radio slot="start" value="30" checked></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>60 Dias</ion-label>
+          <ion-radio slot="start" value="60"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Sem Limite</ion-label>
+          <ion-radio slot="start" value="0"></ion-radio>
+        </ion-item>
+      </ion-radio-group>
+    </ion-list>
 
     <ion-button (click)="cadastrarAnuncio()" expand="block">Cadastrar</ion-button>
   </form>

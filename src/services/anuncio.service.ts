@@ -19,7 +19,7 @@ export class AnuncioService {
 
     atualizarAnuncio(anuncio: Anuncio) {
 
-        return this.http.post(`${API_CONFIG.baseUrl}/novoAnuncio`
+        return this.http.post(`${API_CONFIG.baseUrl}/updateAnuncio`
             , anuncio);
     }
 

@@ -11,7 +11,7 @@ import { PetService } from '../services/pet-service.service';
   templateUrl: './view-update-pet.page.html',
   styleUrls: ['./view-update-pet.page.scss'],
 })
-export class ViewUpdatePetPage implements OnInit, OnDestroy {
+export class ViewUpdatePetPage implements OnInit {
 
   pet = new Pet();
   showEdit = false;
@@ -109,11 +109,6 @@ export class ViewUpdatePetPage implements OnInit, OnDestroy {
         this.presentLoading();
         this.presentAlert(error.error);
       });
-  }
-
-  ngOnDestroy() {
-    console.log('destruído');
-    this.router.navigate(['tabs/tabs/tab3']);
   }
 
 }

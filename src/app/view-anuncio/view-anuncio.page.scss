@@ -1,5 +1,25 @@
 ion-title{
-    background-color: #5c5ce8;
-    color: white;
-    font-weight: bold;
-  }
+  background-color: #5c5ce8;
+  color: white;
+  font-weight: bold;
+}
+
+.preco{
+  text-align: right;
+  color: green;
+}
+
+ion-card-header{
+  width: 75%;
+}
+
+.userAnunName{
+  font-weight: bold;
+  color: blue;
+  width: 75%;
+}
+
+.stars{
+  color: yellow;
+  text-align: right;
+}

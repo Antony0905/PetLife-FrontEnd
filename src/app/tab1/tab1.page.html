@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>
       Localizando Serviços
     </ion-title>
@@ -7,19 +7,16 @@
 </ion-header>
 
 <ion-content>
-
-  <div *ngFor="let anuncio of anuncios">
-    <ion-card (click)="viewAnuncio(anuncio)">
-      <ion-item>
-        <ion-avatar slot="start">
-          <img src="../../assets/imgs/logo.jpg">
-        </ion-avatar>
+  <ion-card *ngFor="let anuncio of anuncios" (click)="viewAnuncio(anuncio)">
+    <ion-item>
+      <img src="../../assets/imgs/{{anuncio.titulo}}.png">
+    </ion-item>
+    <ion-item>
         <h2 class="h2-titulo-anuncio">{{anuncio.titulo}}</h2>
         <h2 class="h2-preco">R$ {{anuncio.preco}}</h2>
-      </ion-item>
-      <ion-card-content>
+    </ion-item>
+    <ion-card-content>
         <p>{{anuncio.descricao}}</p>
       </ion-card-content>
-    </ion-card>
-  </div>
+  </ion-card>
 </ion-content>

@@ -20,6 +20,7 @@ export class ViewUpdateAnuncioPage implements OnInit {
   msgReturn: string;
   email: string;
   usuario: UsuarioDTO;
+  isActive = true;
 
   constructor(
     public activatedRoute: ActivatedRoute,
@@ -39,6 +40,23 @@ export class ViewUpdateAnuncioPage implements OnInit {
       this.anuncio.titulo = res.titulo;
       this.anuncio.preco = res.preco;
       this.anuncio.userId = res.userId;
+      this.anuncio.dataCadastro = res.dataCadastro;
+      this.anuncio.isActive = res.isActive;
+      this.anuncio.segunda = res.segunda;
+      this.anuncio.terca = res.terca;
+      this.anuncio.quarta = res.quarta;
+      this.anuncio.quinta = res.quinta;
+      this.anuncio.sexta = res.sexta;
+      this.anuncio.horario1 = res.horario1;
+      this.anuncio.horario2 = res.horario2;
+      this.anuncio.horario3 = res.horario3;
+
+
+      console.log(this.anuncio.isActive);
+      if (this.anuncio.isActive !== '1') {
+        console.log('entrou');
+        this.isActive = false;
+      }
 
       console.log(this.anuncio);
     });
@@ -138,7 +156,8 @@ export class ViewUpdateAnuncioPage implements OnInit {
       buttons: [{
         text: 'OK',
         handler: () => {
-          this.router.navigate(['tabs/tabs/tab2']);
+          this.navCtrl.navigateForward(['tabs/tabs/tab2']);
+          //this.router.navigate(['tabs/tabs/tab2']);
         }
       }]
     });

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class UsuarioService {
 
+
     constructor(public http: HttpClient) {
 
     }
@@ -26,6 +27,17 @@ export class UsuarioService {
         return this.http.post<UsuarioDTO>(`${API_CONFIG.baseUrl}/findUserByEmail`
             ,
             email,
+            {
+                headers: new HttpHeaders({
+                    'content-Type': 'application/json'
+                })
+            });
+    }
+
+    findUserById(userId: string): Observable<UsuarioDTO> {
+        return this.http.post<UsuarioDTO>(`${API_CONFIG.baseUrl}/findUserById`
+            ,
+            userId,
             {
                 headers: new HttpHeaders({
                     'content-Type': 'application/json'
