@@ -5,6 +5,5 @@ export class Pet {
     idade: string;
     peso: string;
     raca: string;
-    pedigree: string;
     descricao: string;
 }

@@ -19,7 +19,6 @@
     <ion-card-content> Raça: {{ pet.raca }} </ion-card-content>
     <ion-card-content> Idade: {{ pet.idade }} </ion-card-content>
     <ion-card-content> Peso: {{ pet.peso }} </ion-card-content>
-    <ion-card-content> Pedigree {{ pet.pedigree }} </ion-card-content>
     <ion-card-content> Descrição: {{ pet.descricao }} </ion-card-content>
 
     <ion-grid>
@@ -54,10 +53,6 @@
     </ion-item>
     <ion-item>
       <ion-input type="text" [(ngModel)]="pet.peso" name="peso" required>
-      </ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="pet.pedigree" name="pedigree" required>
       </ion-input>
     </ion-item>
     <ion-item>

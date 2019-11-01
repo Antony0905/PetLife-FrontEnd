@@ -1,8 +1,9 @@
 ion-avatar  {
     margin: auto;
     margin-top: 10%;
-    height: 100px;
-    width: 100px;
+    margin-bottom: 10%;
+    height: 120px;
+    width: 120px;
 
 }
 
@@ -21,3 +22,39 @@ ion-title {
     font-weight: bold;
     color: white;
   }
+
+ion-card-content{
+  padding: 0px;
+}
+
+ion-card{
+    text-align: center;
+}
+
+ion-card-title{
+    color:#4c51d4;
+}
+
+ion-card-content{
+    text-align: center;
+    margin-bottom: 10%;
+}
+
+.card-email{
+ margin-bottom: 3%;
+}
+
+.btn{
+    color: #6c757d;
+    background-color: transparent;
+    background-image: none;
+    border-color: #6c757d;
+}
+
+form{
+    margin-bottom: 7%;
+}
+
+ion-grid{
+    margin-top: 5%;
+}

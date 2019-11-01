@@ -5,6 +5,7 @@ import { UsuarioService } from 'src/services/usuario.service';
 import { Pet } from '../models/pet';
 import { PetService } from '../services/pet-service.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-pet',
@@ -26,7 +27,8 @@ export class RegisterPetPage implements OnInit {
     public alertController: AlertController,
     public loadingController: LoadingController,
     public petService: PetService,
-    public authService: AuthenticationService
+    public authService: AuthenticationService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -68,7 +70,12 @@ export class RegisterPetPage implements OnInit {
     const alert = await this.alertController.create({
       header: this.msgReturn,
       message: mensagem,
-      buttons: ['OK']
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['tabs/tabs/tab3']);
+        }
+      }]
     });
 
     await setTimeout(() => { alert.present(); }, 2000);

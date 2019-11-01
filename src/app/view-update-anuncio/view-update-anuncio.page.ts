@@ -156,8 +156,22 @@ export class ViewUpdateAnuncioPage implements OnInit {
       buttons: [{
         text: 'OK',
         handler: () => {
-          this.navCtrl.navigateForward(['tabs/tabs/tab2']);
-          //this.router.navigate(['tabs/tabs/tab2']);
+          this.router.navigate(['tabs/tabs/tab2']);
+        }
+      }]
+    });
+
+    await setTimeout(() => { alert.present(); }, 2000);
+  }
+
+  async presentAlertDelete(mensagem) {
+    const alert = await this.alertController.create({
+      header: this.msgReturn,
+      message: mensagem,
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['tabs/tabs/tab2']);
         }
       }]
     });
@@ -183,7 +197,7 @@ export class ViewUpdateAnuncioPage implements OnInit {
       console.log(response);
       this.msgReturn = 'SUCESSO';
       this.presentLoading();
-      this.presentAlert('Anuncio excluído com sucesso!');
+      this.presentAlertDelete('Anuncio excluído com sucesso!');
     },
       error => {
         this.msgReturn = 'ERROR';

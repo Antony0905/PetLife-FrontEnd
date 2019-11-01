@@ -42,7 +42,6 @@ export class ViewUpdatePetPage implements OnInit {
       this.pet.idade = res.idade;
       this.pet.peso = res.peso;
       this.pet.raca = res.raca;
-      this.pet.pedigree = res.pedigree;
       this.pet.descricao = res.descricao;
     });
   }
@@ -77,6 +76,21 @@ export class ViewUpdatePetPage implements OnInit {
     await setTimeout(() => { alert.present(); }, 2000);
   }
 
+  async presentAlertDelete(mensagem, param?) {
+    const alert = await this.alertController.create({
+      header: this.msgReturn,
+      message: mensagem,
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['tabs/tabs/tab3']);
+        }
+      }]
+    });
+
+    await setTimeout(() => { alert.present(); }, 2000);
+  }
+
   async presentLoading() {
     const loading = await this.loadingController.create({
       message: 'Processando',
@@ -101,7 +115,7 @@ export class ViewUpdatePetPage implements OnInit {
     this.petService.deletePetById(id).subscribe((response) => {
       this.msgReturn = 'SUCESSO';
       this.presentLoading();
-      this.presentAlert('Pet excluído com sucesso!');
+      this.presentAlertDelete('Pet excluído com sucesso!');
       this.ionViewWillEnter();
     },
       error => {

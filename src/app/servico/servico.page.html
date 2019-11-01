@@ -5,7 +5,7 @@
       <ion-back-button color="danger"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>Cadastrar Novo Serviço</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -37,7 +37,7 @@
       </ion-list-header>
       <ion-item *ngFor="let dia of dias">
         <ion-checkbox color="primary" [(ngModel)]="dia.isChecked" name="{{dia.val}}"></ion-checkbox>
-        <ion-label>{{dia.val}}</ion-label>
+        <ion-label class="label-day">{{dia.val}}</ion-label>
       </ion-item>
     </ion-list>
     <ion-list>

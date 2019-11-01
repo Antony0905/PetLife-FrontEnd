@@ -23,6 +23,17 @@ export class UsuarioService {
             });
     }
 
+    update(user: UsuarioDTO) {
+
+        return this.http.post(`${API_CONFIG.baseUrl}/update`
+            , user,
+            {
+                headers: new HttpHeaders({
+                    'content-Type': 'application/json'
+                })
+            });
+    }
+
     findUserByEmail(email: string): Observable<UsuarioDTO> {
         return this.http.post<UsuarioDTO>(`${API_CONFIG.baseUrl}/findUserByEmail`
             ,

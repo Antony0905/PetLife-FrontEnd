@@ -3,8 +3,9 @@ import { LoadingController, NavController } from '@ionic/angular';
 import { AlertController } from '@Ionic/angular';
 import { UsuarioDTO } from 'src/models/usuario.dto';
 import { UsuarioService } from 'src/services/usuario.service';
-import { CepService } from '../services/cep.service';
 import { Endereco } from '../models/endereco';
+import { CepService } from '../services/cep.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,8 @@ export class RegisterPage implements OnInit {
     public usuarioService: UsuarioService,
     public alertController: AlertController,
     public cepService: CepService,
-    public loadingController: LoadingController) {
+    public loadingController: LoadingController,
+    private router: Router) {
 
   }
 
@@ -44,25 +46,37 @@ export class RegisterPage implements OnInit {
         error => {
           this.msgReturn = 'ERROR';
           this.presentLoading();
-          this.presentAlert(error.error);
+          this.presentAlertCepError(error.error);
           console.log(error);
 
         });
-
-    console.log(this.user.email);
-    console.log(this.user.password);
-    console.log(this.user.dataNascimento);
-    console.log(this.user.nome);
   }
 
   async presentAlert(mensagem) {
     const alert = await this.alertController.create({
       header: this.msgReturn,
       message: mensagem,
-      buttons: ['OK']
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['/']);
+        }
+      }]
     });
 
     await setTimeout(() => { alert.present(); }, 2000);
+  }
+
+
+  async presentAlertCepError(mensagem) {
+    const alert = await this.alertController.create({
+      header: this.msgReturn,
+      message: mensagem,
+      buttons: ['OK']
+    });
+    console.log('Alerta');
+    alert.present();
+
   }
 
   async presentLoading() {
@@ -85,8 +99,7 @@ export class RegisterPage implements OnInit {
     },
       error => {
         this.msgReturn = 'ERROR';
-        this.presentAlert('Não foi possível localizar o CEP informado ' + this.user.cep);
-        console.log(error);
+        this.presentAlertCepError('Não foi possível localizar o CEP informado ' + this.user.cep);
       });
   }
 

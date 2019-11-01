@@ -11,5 +11,8 @@ export class UsuarioDTO {
     cidade: string;
     estado: string;
     numero: string;
+    rate: number;
+    dataAtualizacao: string;
     dataCadastro: string;
+
 }

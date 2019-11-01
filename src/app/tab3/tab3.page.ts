@@ -1,18 +1,19 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { UsuarioDTO } from 'src/models/usuario.dto';
 import { UsuarioService } from 'src/services/usuario.service';
 import { Pet } from '../models/pet';
 import { AuthenticationService } from '../services/authentication.service';
 import { PetService } from '../services/pet-service.service';
+import { RouterPage } from '../services/abstract-router-page';
 
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
   styleUrls: ['tab3.page.scss']
 })
-export class Tab3Page {
+export class Tab3Page extends RouterPage implements OnDestroy {
 
   constructor(
     public navCtrl: NavController,
@@ -21,8 +22,10 @@ export class Tab3Page {
     public loadingController: LoadingController,
     public authService: AuthenticationService,
     public usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
+    super(router, route);
 
   }
 
@@ -34,7 +37,7 @@ export class Tab3Page {
     this.navCtrl.navigateForward('register-pet');
   }
 
-  ionViewWillEnter() {
+  onEnter() {
 
     this.authService.getUser().then((val) => {
 
@@ -64,6 +67,10 @@ export class Tab3Page {
     this.router.navigate(['/view-update-pet'], {
       queryParams: pet
     });
+  }
+
+  onDestroy() {
+    super.ngOnDestroy();
   }
 
 }

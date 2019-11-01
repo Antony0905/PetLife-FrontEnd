@@ -1,18 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import { Anuncio } from 'src/models/anuncio';
 import { UsuarioDTO } from 'src/models/usuario.dto';
 import { AnuncioService } from 'src/services/anuncio.service';
 import { UsuarioService } from 'src/services/usuario.service';
 import { AuthenticationService } from '../services/authentication.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { RouterPage } from '../services/abstract-router-page';
 
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page {
+export class Tab2Page extends RouterPage implements OnDestroy {
 
   constructor(
     public navCtrl: NavController,
@@ -21,24 +22,26 @@ export class Tab2Page {
     public loadingController: LoadingController,
     public authService: AuthenticationService,
     public usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-
+    super(router, route);
   }
 
   anuncios: Anuncio[];
   email: string;
   usuario: UsuarioDTO;
 
-  ionViewWillEnter() {
+  onEnter() {
 
     this.authService.getUser().then((val) => {
 
       this.email = val;
+      console.log(this.email);
       this.usuarioService.findUserByEmail(this.email).subscribe((response) => {
 
         this.usuario = response;
-
+        console.log(this.usuario);
         this.anuncioService.findByUserId(this.usuario.id).subscribe((response2) => {
           this.anuncios = response2;
           console.log(this.anuncios);
@@ -65,6 +68,11 @@ export class Tab2Page {
     this.router.navigate(['/view-update-anuncio'], {
       queryParams: anuncio
     });
+  }
+
+
+  onDestroy() {
+    super.ngOnDestroy();
   }
 
 }

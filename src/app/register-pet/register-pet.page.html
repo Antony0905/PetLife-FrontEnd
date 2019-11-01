@@ -5,7 +5,7 @@
       <ion-back-button color="danger"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar>
+  <ion-toolbar color="tertiary">
     <ion-title>Cadastrar Novo Pet</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -26,9 +26,6 @@
     </ion-item>
     <ion-item>
       <ion-input type="text" [(ngModel)]="pet.raca" name="raca" required placeholder="Raça"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="pet.pedigree" name="pedigree" required placeholder="flag"></ion-input>
     </ion-item>
     <ion-item>
       <ion-textarea type="text" [(ngModel)]="pet.descricao" name="descricao" required

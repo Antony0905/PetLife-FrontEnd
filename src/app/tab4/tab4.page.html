@@ -1,21 +1,85 @@
 <ion-header>
   <ion-toolbar color="tertiary">
     <ion-title>
-      Perfil
+      Profile
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-avatar>
-    <img src="../../assets/imgs/profile-default.png">
-  </ion-avatar>
-  <h1 class="h1-nome"> {{ nome }} </h1>
+  <ion-item>
+    <ion-avatar>
+      <img src="../../assets/imgs/profile-default.png">
+    </ion-avatar>
+  </ion-item>
 
-  <ion-button class="btn-op1" expand="full" (click)="logout()">Serviços Contratados</ion-button>
-  <ion-button expand="full" (click)="logout()">Meus Serviços</ion-button>
-  <ion-button expand="full" (click)="logout()">Meus Pets</ion-button>
-  <ion-button expand="full" (click)="logout()">Logout</ion-button>
+  <ion-card *ngIf="!showEdit">
+    <ion-card-header>
+      <ion-card-title> {{ usuario.nome }} </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content class="card-email"> {{ usuario.email }} </ion-card-content>
+    <ion-card-content>  Data Nascimento: {{ dataNascimento }} </ion-card-content>
+
+    <ion-button class="btn-op1" color="tertiary" expand="full" (click)="editProfile()">Editar Perfil</ion-button>
+    <ion-button expand="full" color="tertiary" (click)="logout()">Agenda</ion-button>
+    <ion-button expand="full" color="tertiary" (click)="logout()">Logout</ion-button>
+
+  </ion-card>
+
+  <form *ngIf="showEdit">
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="usuario.nome" name="nome" required placeholder="Nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Data de Nascimento</ion-label>
+      <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="usuario.dataNascimento" name="dataNascimento"
+        placeholder="DD MM YYYY">
+      </ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="usuario.cep" name="cep" required placeholder="Cep">
+      </ion-input>
+      <ion-button (click)="buscarEndereco()" expand="block">Buscar</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" disabled="true" [(ngModel)]="usuario.logradouro" name="logradouro" required
+        placeholder="Logradouro">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="usuario.numero" name="numero" required placeholder="Nº">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="usuario.complemento" name="complemento" required placeholder="Complemento">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" disabled="true" [(ngModel)]="usuario.bairro" name="bairro" required placeholder="Bairro">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" disabled="true" [(ngModel)]="usuario.cidade" name="cidade" required placeholder="Cidade">
+      </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" disabled="true" [(ngModel)]="usuario.estado" name="estado" required placeholder="Estado">
+      </ion-input>
+    </ion-item>
+    <ion-grid class="buttons-form">
+      <ion-row>
+        <ion-col>
+          <ion-button (click)="cancelEditProfile()" color="danger" expand="block">Cancelar</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="updateProfile()" color="primary" expand="block">Atualizar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  <ion-card-content> Usuário desde: {{ dataCadastro }} </ion-card-content>
 
 </ion-content>
