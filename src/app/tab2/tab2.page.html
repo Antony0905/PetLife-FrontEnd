@@ -15,16 +15,15 @@
   <img src="../../assets/imgs/servicos.jpg" />
 
   <div *ngFor="let anuncio of anuncios">
-    <ion-card>
-      <ion-item (click)="viewOrUpdateAnuncio(anuncio)">
-        <ion-avatar slot="start">
-          <img src="../../assets/imgs/logo.jpg">
-        </ion-avatar>
+    <ion-card (click)="viewOrUpdateAnuncio(anuncio)">
+      <ion-item>
+        <h2 style="margin-right: 4%;width: 67px;">{{anuncio.id}}</h2>
         <h2 class="h2-titulo-anuncio">{{anuncio.titulo}}</h2>
         <h2 class="h2-preco">R$ {{anuncio.preco}}</h2>
       </ion-item>
-      <ion-card-content>
-        <p>{{anuncio.descricao}}</p>
+      <ion-card-content style="text-align: center;">
+        <p>Descrição: {{anuncio.descricao}}</p>
+        <p style="color: red;font-weight: bold;">Data de Cadastro: {{anuncio.dataCadastroFormatted}}</p>
       </ion-card-content>
     </ion-card>
   </div>

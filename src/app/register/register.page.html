@@ -8,7 +8,9 @@
 </ion-header>
 <ion-content padding>
 
-  <img src="../../assets/imgs/petrun.jpg" alt="logo">
+  <div style="text-align: center;">
+    <img style="width: 73%;" src="../../assets/imgs/petrun.jpg" alt="logo">
+  </div>
 
   <form>
     <ion-item>
@@ -19,6 +21,12 @@
       <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="user.dataNascimento" name="dataNascimento"
         placeholder="DD MM YYYY">
       </ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-input type="tel" maxlength="2" [(ngModel)]="user.ddd" name="ddd" required placeholder="DDD"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="tel" maxlength="9" [(ngModel)]="user.telefone" name="telefone" required placeholder="Telefone"></ion-input>
     </ion-item>
     <ion-item>
       <ion-input type="text" [(ngModel)]="user.email" name="email" required placeholder="E-mail"></ion-input>
@@ -57,7 +65,7 @@
       <ion-input type="text" disabled="true" [(ngModel)]="user.estado" name="estado" required placeholder="Estado">
       </ion-input>
     </ion-item>
-    <ion-button expand="block" (click)="registrar()">Registrar</ion-button>
+    <ion-button expand="block" (click)="registrar()">Cadastrar</ion-button>
   </form>
 
 </ion-content>

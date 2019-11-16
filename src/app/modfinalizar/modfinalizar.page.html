@@ -1,0 +1,22 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-card>
+    <ion-card-header style="padding-top: 20px;">
+      <ion-card-title> Avalie nosso profissional <span style="color: #5db95d;font-weight: bold;">{{anunciante.nome}}</span></ion-card-title>
+    </ion-card-header>
+    <form>
+      <ion-item>
+        <ion-textarea rows="6" cols="20" [(ngModel)]="service.comentario" name="descricao" required
+          placeholder="Deixe seu comentário aqui."></ion-textarea>
+      </ion-item>
+      <ion-button (click)="finalizar()" expand="block">Finalizar Serviço</ion-button>
+    </form>
+  </ion-card>
+</ion-content>

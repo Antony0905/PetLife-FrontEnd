@@ -10,6 +10,12 @@ const routes: Routes = [
   { path: 'view-update-anuncio', loadChildren: './view-update-anuncio/view-update-anuncio.module#ViewUpdateAnuncioPageModule' },
   { path: 'register-pet', loadChildren: './register-pet/register-pet.module#RegisterPetPageModule' },
   { path: 'view-update-pet', loadChildren: './view-update-pet/view-update-pet.module#ViewUpdatePetPageModule' },
+  { path: 'servicos-contratados', loadChildren: './servicos-contratados/servicos-contratados.module#ServicosContratadosPageModule' },
+  { path: 'view-servicos-contratados', loadChildren: './view-servicos-contratados/view-servicos-contratados.module#ViewServicosContratadosPageModule' },
+  { path: 'servicos-prestados', loadChildren: './servicos-prestados/servicos-prestados.module#ServicosPrestadosPageModule' },
+  { path: 'view-servicos-prestados', loadChildren: './view-servicos-prestados/view-servicos-prestados.module#ViewServicosPrestadosPageModule' },
+  { path: 'modfinalizar', loadChildren: './modfinalizar/modfinalizar.module#ModfinalizarPageModule' },
+  { path: 'modrelatarproblema', loadChildren: './modrelatarproblema/modrelatarproblema.module#ModrelatarproblemaPageModule' }
 ];
 @NgModule({
   imports: [

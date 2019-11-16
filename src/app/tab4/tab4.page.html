@@ -16,14 +16,12 @@
 
   <ion-card *ngIf="!showEdit">
     <ion-card-header>
-      <ion-card-title> {{ usuario.nome }} </ion-card-title>
+      <ion-card-title style="font-family: monospace; color: #5d5d62;font-size: 36px;"> {{ usuario.nome }}
+      </ion-card-title>
     </ion-card-header>
-
-    <ion-card-content class="card-email"> {{ usuario.email }} </ion-card-content>
-    <ion-card-content>  Data Nascimento: {{ dataNascimento }} </ion-card-content>
-
     <ion-button class="btn-op1" color="tertiary" expand="full" (click)="editProfile()">Editar Perfil</ion-button>
-    <ion-button expand="full" color="tertiary" (click)="logout()">Agenda</ion-button>
+    <ion-button expand="full" color="tertiary" (click)="servicosContratados()">Serviços Contratados</ion-button>
+    <ion-button expand="full" color="tertiary" (click)="servicosPrestados()">Serviços Prestados</ion-button>
     <ion-button expand="full" color="tertiary" (click)="logout()">Logout</ion-button>
 
   </ion-card>
@@ -33,15 +31,25 @@
       <ion-input type="text" [(ngModel)]="usuario.nome" name="nome" required placeholder="Nome"></ion-input>
     </ion-item>
     <ion-item>
+      <ion-input disabled="true" type="text" [(ngModel)]="usuario.email" name="email"></ion-input>
+    </ion-item>
+    <ion-item>
       <ion-label>Data de Nascimento</ion-label>
       <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="usuario.dataNascimento" name="dataNascimento"
         placeholder="DD MM YYYY">
       </ion-datetime>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="usuario.cep" name="cep" required placeholder="Cep">
+      <ion-input type="tel" maxlength="2" [(ngModel)]="usuario.ddd" name="ddd" required placeholder="DDD"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="tel" maxlength="9" [(ngModel)]="usuario.telefone" name="telefone" required placeholder="Telefone">
       </ion-input>
-      <ion-button (click)="buscarEndereco()" expand="block">Buscar</ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-input (ionBlur)="buscarEndereco()" type="text" [(ngModel)]="usuario.cep" name="cep" required
+        placeholder="Cep">
+      </ion-input>
     </ion-item>
     <ion-item>
       <ion-input type="text" disabled="true" [(ngModel)]="usuario.logradouro" name="logradouro" required

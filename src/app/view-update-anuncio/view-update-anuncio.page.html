@@ -9,7 +9,6 @@
     <ion-title>Anuncio</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
 
   <img src="../../assets/imgs/servicos.jpg" />
@@ -18,9 +17,76 @@
 
   <ion-card *ngIf="!showEdit">
     <ion-card-header>
-      <ion-card-title> {{ anuncio.titulo }} </ion-card-title>
+      <ion-card-title style="text-align: center;color: #ff7300;"> {{ anuncio.titulo }} </ion-card-title>
     </ion-card-header>
-    <ion-card-content> {{ anuncio.descricao }} </ion-card-content>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Descrição</ion-label>
+      </ion-list-header>
+      <ion-card-content> {{ anuncio.descricao }} </ion-card-content>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Dias disponíveis</ion-label>
+      </ion-list-header>
+      <ion-item *ngIf="anuncio.segunda === 'true'">
+        <ion-icon style="color: green" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+        <ion-label class="label-days">Segunda</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.terca === 'true'">
+        <ion-icon style="color: green" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+        <ion-label class="label-days">Terça</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.quarta === 'true'">
+        <ion-icon style="color: green" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+        <ion-label class="label-days">Quarta</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.quinta === 'true'">
+        <ion-icon style="color: green" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+        <ion-label class="label-days">Quinta</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.sexta === 'true'">
+        <ion-icon style="color: green" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+        <ion-label class="label-days">Sexta</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.sabado === 'true'">
+        <ion-icon style="color: green" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+        <ion-label class="label-days">Sábado</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.domingo === 'true'">
+        <ion-icon style="color: green" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+        <ion-label class="label-days">Domingo</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Horários disponíveis</ion-label>
+      </ion-list-header>
+      <ion-item *ngIf="anuncio.horario1 !== ''">
+        <ion-icon style="color: green" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+        <ion-label class="label-days">{{anuncio.horario1}} hrs</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.horario2 !== ''">
+        <ion-icon style="color: green" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+        <ion-label class="label-days">{{anuncio.horario2}} hrs</ion-label>
+      </ion-item>
+      <ion-item *ngIf="anuncio.horario3 !== ''">
+        <ion-icon style="color: green" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+        <ion-label class="label-days">{{anuncio.horario3}} hrs</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Tempo de disponibilidade do anúncio</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-icon style="color: green" ios="ios-checkmark" md="md-checkmark"></ion-icon>
+        <ion-label>{{anuncio.expirationTime}} Dias</ion-label>
+      </ion-item>
+    </ion-list>
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -42,7 +108,7 @@
       <ion-list-header>Single Selection</ion-list-header>
       <ion-item>
         <ion-label>Título</ion-label>
-        <ion-select [(ngModel)]="anuncio.titulo" name="anuncio.titulo">
+        <ion-select disabled="true" [(ngModel)]="anuncio.titulo" name="anuncio.titulo">
           <ion-select-option selected value="1">Passeio de Pets</ion-select-option>
           <ion-select-option value="2">Hospedagem de Pets</ion-select-option>
           <ion-select-option value="3">Banho de Pets</ion-select-option>
@@ -51,9 +117,37 @@
       </ion-item>
     </ion-list>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="anuncio.descricao" name="descricao" required>
-      </ion-input>
+      <ion-textarea rows="8" cols="20" type="text" [(ngModel)]="anuncio.descricao" name="descricao" required>
+      </ion-textarea>
     </ion-item>
+    <ion-list style="margin-top: 10%;">
+      <ion-list-header>
+        <ion-label>Selecione os dias que possui disponibilidade</ion-label>
+      </ion-list-header>
+      <ion-item *ngFor="let dia of dias">
+        <ion-checkbox disabled="true" color="primary" [(ngModel)]="dia.isChecked" name="{{dia.val}}"></ion-checkbox>
+        <ion-label disabled="true" class="label-day">{{dia.val}}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Selecione até 3 horários diferentes que deseja iniciar as atividades, lembrando que o tempo médio por
+          serviço é de 1 hora.</ion-label>
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label disabled="true">Primeiro Horário</ion-label>
+        <ion-datetime disabled="true" displayFormat="HH"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label disabled="true">Segundo Horário</ion-label>
+        <ion-datetime disabled="true" displayFormat="HH"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label disabled="true">Terceiro Horário</ion-label>
+        <ion-datetime disabled="true" displayFormat="HH"></ion-datetime>
+      </ion-item>
+    </ion-list>
     <ion-grid>
       <ion-row>
         <ion-col>

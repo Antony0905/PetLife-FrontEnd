@@ -15,8 +15,17 @@
   <ion-card>
     <img src="../../assets/imgs/servico.jpg" />
     <ion-item>
+      <ion-card-header>
+        <ion-card-title style="font-family: sans-serif;font-size: 22px;color: #ff7300;margin-top: 10%;">
+          {{ anuncio.titulo }} </ion-card-title>
+      </ion-card-header>
+      <h1 style="font-size: 24px;
+      margin-bottom: 0%;
+      margin-top: 8%;" class="preco">R$ {{ preco }}</h1>
+    </ion-item>
+    <ion-item>
       <ion-card-header class="userAnunName">
-        <h4>{{usuarioAnunciante.nome}}</h4>
+        <h1 style="margin-top: 0px;font-size: 21px;">{{usuarioAnunciante.nome}}</h1>
       </ion-card-header>
       <div class="stars">
         <ion-icon name="star"></ion-icon>
@@ -25,46 +34,70 @@
         <ion-icon name="star"></ion-icon>
       </div>
     </ion-item>
-    <ion-item>
-      <ion-card-header>
-        <ion-card-title> {{ anuncio.titulo }} </ion-card-title>
-      </ion-card-header>
-      <h1 class="preco">R$ {{ preco }}</h1>
-    </ion-item>
-    <ion-item>
-      <ion-card-content> {{ anuncio.descricao }} </ion-card-content>
-    </ion-item>
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Descrição</ion-label>
+      </ion-list-header>
+
+      <ion-card-content style="margin-left: 4%;">
+        {{anuncio.descricao}}
+      </ion-card-content>
+    </ion-list>
+
+    <ion-list (ionChange)="checkDays($event)">
+      <ion-list-header>
+        <ion-label>Endereço do Anunciante</ion-label>
+      </ion-list-header>
+      <ion-card-content style="margin-left: 4%;padding-bottom: 1%;padding-top: 1%;">
+        <span style="color: #29231f;font-weight: bold;font-family: sans-serif;">Bairro:</span>
+        {{ usuarioAnunciante.bairro}}
+      </ion-card-content>
+      <ion-card-content style="margin-left: 4%; padding-top: 0%;">
+        <span style="color: #29231f;font-weight: bold;font-family: sans-serif;">Cidade:</span>
+        {{ usuarioAnunciante.cidade }}
+      </ion-card-content>
+    </ion-list>
+
+
+
     <ion-list (ionChange)="checkDays($event)">
       <ion-list-header>
         <ion-label>Dias disponíveis</ion-label>
       </ion-list-header>
       <ion-item *ngIf="anuncio.segunda === 'true'">
-        <ion-checkbox color="primary" [(ngModel)]="agenda.segunda" name="{{agenda.segunda}}"></ion-checkbox>
-        <ion-label>Segunda</ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="disponibleDays[1].isActive" name="{{disponibleDays[1].day}}">
+        </ion-checkbox>
+        <ion-label class="label-days">Segunda - {{week.monday}}</ion-label>
       </ion-item>
       <ion-item *ngIf="anuncio.terca === 'true'">
-        <ion-checkbox color="primary" [(ngModel)]="agenda.terca" name="{{agenda.terca}}"></ion-checkbox>
-        <ion-label>Terça</ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="disponibleDays[2].isActive" name="{{disponibleDays[2].day}}">
+        </ion-checkbox>
+        <ion-label class="label-days">Terça - {{week.tuesday}}</ion-label>
       </ion-item>
       <ion-item *ngIf="anuncio.quarta === 'true'">
-        <ion-checkbox color="primary" [(ngModel)]="agenda.quarta" name="{{agenda.quarta}}"></ion-checkbox>
-        <ion-label>Quarta</ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="disponibleDays[3].isActive" name="{{disponibleDays[3].day}}">
+        </ion-checkbox>
+        <ion-label class="label-days">Quarta - {{week.wednesday}}</ion-label>
       </ion-item>
       <ion-item *ngIf="anuncio.quinta === 'true'">
-        <ion-checkbox color="primary" [(ngModel)]="agenda.quinta" name="{{agenda.quinta}}"></ion-checkbox>
-        <ion-label>Quinta</ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="disponibleDays[4].isActive" name="{{disponibleDays[4].day}}">
+        </ion-checkbox>
+        <ion-label class="label-days">Quinta - {{week.thursday}}</ion-label>
       </ion-item>
       <ion-item *ngIf="anuncio.sexta === 'true'">
-        <ion-checkbox color="primary" [(ngModel)]="agenda.sexta" name="{{agenda.sexta}}"></ion-checkbox>
-        <ion-label>Sexta</ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="disponibleDays[5].isActive" name="{{disponibleDays[5].day}}">
+        </ion-checkbox>
+        <ion-label class="label-days">Sexta - {{week.friday}}</ion-label>
       </ion-item>
       <ion-item *ngIf="anuncio.sabado === 'true'">
-        <ion-checkbox color="primary" [(ngModel)]="agenda.sabado" name="{{agenda.sabado}}"></ion-checkbox>
-        <ion-label>Sábado</ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="disponibleDays[6].isActive" name="{{disponibleDays[6].day}}">
+        </ion-checkbox>
+        <ion-label class="label-days">Sábado - {{week.saturday}}</ion-label>
       </ion-item>
       <ion-item *ngIf="anuncio.domingo === 'true'">
-        <ion-checkbox color="primary" [(ngModel)]="agenda.domingo" name="{{agenda.domingo}}"></ion-checkbox>
-        <ion-label>Domingo</ion-label>
+        <ion-checkbox color="primary" [(ngModel)]="disponibleDays[0].isActive" name="{{disponibleDays[0].day}}">
+        </ion-checkbox>
+        <ion-label class="label-days">Domingo - {{week.sunday}}</ion-label>
       </ion-item>
     </ion-list>
 
@@ -114,13 +147,13 @@
         <ion-item>
           <ion-label>Pagamento em Dinheiro</ion-label>
           <ion-icon name="cash"></ion-icon>
-          <ion-radio slot="start" value="dinheiro"></ion-radio>
+          <ion-radio slot="start" value="Dinheiro"></ion-radio>
         </ion-item>
 
         <ion-item disabled="true">
           <ion-label>Cartão de Crédito</ion-label>
           <ion-icon name="card"></ion-icon>
-          <ion-radio slot="start" value="credito"></ion-radio>
+          <ion-radio slot="start" value="Credito"></ion-radio>
         </ion-item>
       </ion-radio-group>
     </ion-list>

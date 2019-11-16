@@ -6,6 +6,7 @@ import { AnuncioService } from 'src/services/anuncio.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { UsuarioService } from 'src/services/usuario.service';
 import { UsuarioDTO } from 'src/models/usuario.dto';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-view-update-anuncio',
@@ -21,6 +22,16 @@ export class ViewUpdateAnuncioPage implements OnInit {
   email: string;
   usuario: UsuarioDTO;
   isActive = true;
+
+  public dias = [
+    { val: 'Segunda', isChecked: false },
+    { val: 'Terça', isChecked: false },
+    { val: 'Quarta', isChecked: false },
+    { val: 'Quinta', isChecked: false },
+    { val: 'Sexta', isChecked: false },
+    { val: 'Sabado', isChecked: false },
+    { val: 'Domingo', isChecked: false }
+  ];
 
   constructor(
     public activatedRoute: ActivatedRoute,
@@ -47,10 +58,12 @@ export class ViewUpdateAnuncioPage implements OnInit {
       this.anuncio.quarta = res.quarta;
       this.anuncio.quinta = res.quinta;
       this.anuncio.sexta = res.sexta;
+      this.anuncio.sabado = res.sabado;
+      this.anuncio.domingo = res.domingo;
       this.anuncio.horario1 = res.horario1;
       this.anuncio.horario2 = res.horario2;
       this.anuncio.horario3 = res.horario3;
-
+      this.anuncio.expirationTime = res.expirationTime;
 
       console.log(this.anuncio.isActive);
       if (this.anuncio.isActive !== '1') {
@@ -79,8 +92,12 @@ export class ViewUpdateAnuncioPage implements OnInit {
   atualizarAnuncio() {
 
     this.validateTitleAndPrice();
+    console.log(this.anuncio);
+
+
     this.anuncioService.atualizarAnuncio(this.anuncio)
       .subscribe((response2) => {
+
         this.msgReturn = 'SUCESSO';
         this.presentLoading();
         this.presentAlert('Anuncio atualizado com sucesso!');

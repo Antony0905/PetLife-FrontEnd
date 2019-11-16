@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="tertiary">
+    <ion-title>Serviços Prestados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div style="background-color: #70c31a;" *ngFor="let agenda of agendas">
+    <ion-card (click)="viewServico(agenda)">
+      <ion-item>
+        <h2 class="h1-agenda-id">{{agenda.id}}</h2>
+        <h2 class="service-name">{{agenda.serviceName}}</h2>
+
+        <ion-icon *ngIf="agenda.isActive == true" class="icon-warning" ios="ios-remove-circle" md="md-remove-circle">
+        </ion-icon>
+        <ion-icon *ngIf="agenda.isActive == false" class="icon-success" ios="ios-checkmark-circle"
+          md="md-checkmark-circle"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <div class="h4-name">
+          <h4 class="h4-user-name-anuncio">{{agenda.userNameAnuncio}}</h4>
+          <h4 class="h4-agenda-horario">Data: {{agenda.data}} às {{agenda.horario}} hrs</h4>
+        </div>
+        <h4 class="h4-price">R$ {{agenda.preco}},00</h4>
+      </ion-item>
+    </ion-card>
+  </div>
+</ion-content>

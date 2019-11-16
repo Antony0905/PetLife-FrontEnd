@@ -20,6 +20,8 @@ export class RegisterPetPage implements OnInit {
   user = new UsuarioDTO();
   email: string;
   usuario = new UsuarioDTO();
+  numbers = new Array();
+  dogsBreed = true;
 
   constructor(
     public navCtrl: NavController,
@@ -29,7 +31,16 @@ export class RegisterPetPage implements OnInit {
     public petService: PetService,
     public authService: AuthenticationService,
     private router: Router
-  ) { }
+  ) {
+
+    for (let index = 0; index <= 50; index++) {
+      this.numbers.push(index);
+    }
+
+    this.pet.petType = 'Cachorro';
+    this.pet.raca = 'Outros';
+
+  }
 
   ngOnInit() {
   }
@@ -91,6 +102,19 @@ export class RegisterPetPage implements OnInit {
     const { role, data } = await loading.onDidDismiss();
 
     console.log('Loading dismissed!');
+  }
+
+
+
+
+  changeSelectBreeds(event) {
+
+    if ('Cachorro' === event.detail.value) {
+      this.dogsBreed = true;
+    } else {
+      this.dogsBreed = false;
+    }
+
   }
 
 }

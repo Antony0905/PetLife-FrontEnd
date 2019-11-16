@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { CepService } from '../services/cep.service';
 import { Endereco } from '../models/endereco';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab4',
@@ -35,7 +36,8 @@ export class Tab4Page {
     public usuarioService: UsuarioService,
     public alertController: AlertController,
     public cepService: CepService,
-    public loadingController: LoadingController
+    public loadingController: LoadingController,
+    private router: Router
   ) {
   }
 
@@ -64,6 +66,8 @@ export class Tab4Page {
         this.usuario.dataAtualizacao = res.dataAtualizacao;
         this.usuario.email = res.email;
         this.usuario.rate = res.rate;
+        this.usuario.ddd = res.ddd;
+        this.usuario.telefone = res.telefone;
 
       },
         error => {
@@ -156,6 +160,14 @@ export class Tab4Page {
           console.log(error);
 
         });
+  }
+
+  servicosContratados() {
+    this.router.navigate(['/servicos-contratados']);
+  }
+
+  servicosPrestados() {
+    this.router.navigate(['/servicos-prestados']);
   }
 
 }

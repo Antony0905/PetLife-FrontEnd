@@ -1,0 +1,25 @@
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-card>
+    <ion-card-header style="padding-top: 20px;font-family: monospace;">
+      <ion-card-title style="font-size: 23px;"> Caso ocorra algum problema com seu serviço contratado, por favor descreva abaixo e nós
+        retornaremos o mais breve possível.</ion-card-title>
+    </ion-card-header>
+    <ion-card-content> O que você gostaria de nos contar sobre <span style="color: red;font-weight: bold;">{{anunciante.nome}}</span>? </ion-card-content>
+    <form>
+      <ion-item>
+        <ion-textarea rows="8" cols="20" name="descricao" [(ngModel)]="service.comentario" required
+          placeholder="Descreva seu problema aqui.">
+        </ion-textarea>
+      </ion-item>
+      <ion-button (click)="relatar()" color="danger" expand="block">Relatar Problema</ion-button>
+    </form>
+  </ion-card>
+</ion-content>

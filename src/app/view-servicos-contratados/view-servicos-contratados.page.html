@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="tertiary">
+    <ion-title>Serviço Contratado</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <div style="text-align: center;">
+    <img style="width: 11%;margin-top: 6%;" src="../../assets/imgs/pata.png" alt="pata">
+  </div>
+
+  <ion-card>
+    <ion-card-header style="padding-top: 0;">
+      <ion-card-title> Anuncio </ion-card-title>
+    </ion-card-header>
+    <ion-card-content> <span class="span-color">Serviço:</span> {{ agenda.serviceName }} </ion-card-content>
+    <ion-card-content> <span class="span-color">Data:</span> {{ agenda.data }} às {{agenda.horario}}:00 hrs
+    </ion-card-content>
+    <ion-card-content> <span class="span-color">Forma de Pagamento:</span> {{ agenda.formaPagamento }} </ion-card-content>
+    <h5 style="float: right;margin-right: 7%;color: #2ca929;font-weight: bold;">R$ {{agenda.preco}},00</h5>
+
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Anunciante </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content> <span class="span-color">Nome:</span> {{anunciante.nome}} </ion-card-content>
+    <ion-card-content> <span class="span-color">Contato:</span> {{anunciante.ddd}}{{anunciante.telefone}}
+    </ion-card-content>
+    <ion-card-content> <span class="span-color">Bairro:</span> {{anunciante.bairro}} </ion-card-content>
+    <ion-card-content style="padding-bottom: 20px;"> <span class="span-color">Cidade:</span> {{anunciante.cidade}}
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Pet </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content> <span class="span-color">Nome:</span> {{pet.nome}} </ion-card-content>
+    <ion-card-content> <span class="span-color">Raça:</span> {{pet.raca}} </ion-card-content>
+    <ion-card-content> <span class="span-color">Idade:</span> {{pet.idade}} anos </ion-card-content>
+    <ion-card-content style="padding-bottom: 20px;"> <span class="span-color">Peso:</span> {{pet.peso}} kg
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngIf="agenda.isActive === 'true'">
+        <ion-button (click)="showModalFinalizar()" expand="block">Finalizar Serviço</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="showModalRelatarProblema()" expand="block" color="danger" ion-button full>Relatar Problema
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

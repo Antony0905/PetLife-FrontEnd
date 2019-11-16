@@ -6,4 +6,6 @@ export class Pet {
     peso: string;
     raca: string;
     descricao: string;
+    petType: string;
+
 }

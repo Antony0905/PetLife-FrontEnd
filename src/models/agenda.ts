@@ -3,16 +3,13 @@ export class Agenda {
     clienteId: string;
     anuncianteId: string;
     anuncioId: string;
+    userNameAnuncio: string;
     petId: string;
     dataCadastro: string;
-    segunda: boolean;
-    terca: boolean;
-    quarta: boolean;
-    quinta: boolean;
-    sexta: boolean;
-    sabado: boolean;
-    domingo: boolean;
+    data: string;
     horario: string;
     preco: string;
     formaPagamento: string;
+    isActive: string;
+    serviceName: string;
 }

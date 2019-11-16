@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="tertiary">
+    <ion-title>Serviços Contratados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item (ionChange)="changeSelected($event)">
+    <ion-label>Selecione</ion-label>
+    <ion-select value="andamento" interface="popover">
+      <ion-select-option value="andamento">Em Andamento</ion-select-option>
+      <ion-select-option value="concluido">Concluído</ion-select-option>
+      <ion-select-option value="todos">Todos</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <div *ngIf="showServices == 'todos' || showServices == 'andamento'" style="background-color: #878874; height: 10px;"></div>
+
+  <div *ngIf="showServices == 'andamento' || showServices == 'todos'">
+    <ion-list-header
+      style="margin-top: 5%;padding-right: 16px;font-family: monospace;font-size: 16px;font-weight: bold;width: 100%;">
+      <ion-label style="width: 100%;text-align: center;">Próximos compromissos
+      </ion-label>
+    </ion-list-header>
+
+    <div style="background-color: #7f7bab;" *ngFor="let agenda of agendas">
+      <ion-card *ngIf="agenda.isActive == true" (click)="viewServico(agenda)">
+        <ion-item>
+          <h2 class="service-name">{{agenda.serviceName}}</h2>
+
+          <ion-icon *ngIf="agenda.isActive == true" ios="md-alarm" md="md-alarm">
+          </ion-icon>
+          <ion-icon *ngIf="agenda.isActive == false" class="icon-success" ios="ios-checkmark" md="ios-checkmark">
+          </ion-icon>
+        </ion-item>
+        <ion-item style="text-align: center;">
+          <div class="h4-name">
+            <h6 class="h4-user-name-anuncio">Anunciante: {{agenda.userNameAnuncio}}</h6>
+            <h6 class="h4-agenda-horario">Data: {{agenda.data}} às {{agenda.horario}} hrs</h6>
+            <h4 class="h4-price">R$ {{agenda.preco}},00</h4>
+
+          </div>
+        </ion-item>
+      </ion-card>
+    </div>
+  </div>
+
+  <div *ngIf="showServices == 'todos' || showServices == 'concluido'" style="background-color: #878874; height: 10px;"></div>
+
+  <div *ngIf="showServices == 'concluido' || showServices == 'todos'">
+
+    <ion-list-header
+      style="margin-top: 5%;padding-right: 16px;font-family: monospace;font-size: 16px;font-weight: bold;width: 100%;">
+      <ion-label style="width: 100%;text-align: center;">Compromissos finalizados
+      </ion-label>
+    </ion-list-header>
+
+    <div style="background-color: #7f7bab;" *ngFor="let agenda of agendas">
+      <ion-card *ngIf="agenda.isActive == false" (click)="viewServico(agenda)">
+        <ion-item>
+          <h2 class="service-name">{{agenda.serviceName}}</h2>
+
+          <ion-icon *ngIf="agenda.isActive == true" ios="md-alarm" md="md-alarm">
+          </ion-icon>
+          <ion-icon *ngIf="agenda.isActive == false" class="icon-success" ios="ios-checkmark" md="ios-checkmark">
+          </ion-icon>
+        </ion-item>
+        <ion-item style="text-align: center;">
+          <div class="h4-name">
+            <h6 class="h4-user-name-anuncio">Anunciante: {{agenda.userNameAnuncio}}</h6>
+            <h6 class="h4-agenda-horario">Data: {{agenda.data}} às {{agenda.horario}} hrs</h6>
+            <h4 class="h4-price">R$ {{agenda.preco}},00</h4>
+
+          </div>
+        </ion-item>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>

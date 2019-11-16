@@ -1,18 +1,19 @@
 <ion-content padding>
 
+
   <div class="container">
     <img class="logo" src="../../assets/imgs/petrun.jpg" alt="logo">
   </div>
   <form>
     <ion-item>
-      <ion-label stacked>Email</ion-label>
+      <ion-label style="color: #000aff;font-weight: bold;font-family: inherit;" stacked>Email</ion-label>
       <ion-input type="text" [(ngModel)]="auth.email" name="email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label stacked>Senha</ion-label>
+      <ion-label style="color: #000aff;font-weight: bold;font-family: inherit;" stacked>Senha</ion-label>
       <ion-input type="password" [(ngModel)]="auth.password" name="password"></ion-input>
     </ion-item>
-    <ion-button expand="block" (click)="login()">Entrar</ion-button>
-    <ion-button expand="block" (click)="register()" fill="outline">Registrar</ion-button>
+    <ion-button style="margin-top: 9%;" expand="block" (click)="login()">Entrar</ion-button>
+    <ion-button style="margin-top: 5%;" expand="block" (click)="register()" fill="outline">Cadastre-se</ion-button>
   </form>
 </ion-content>

@@ -15,20 +15,66 @@
   <img class="img-cadastrar-pet" src="../../assets/imgs/cadastrar-pet.png" alt="logo">
 
   <form>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="pet.nome" name="nome" required placeholder="Nome"></ion-input>
+    <ion-item (ionChange)="changeSelectBreeds($event)">
+      <ion-label>Pet</ion-label>
+      <ion-select value="Cachorro" okText="Okay" [(ngModel)]="pet.petType" name="petType" cancelText="Dismiss">
+        <ion-select-option value="Cachorro">Cachorro</ion-select-option>
+        <ion-select-option value="Gato">Gato</ion-select-option>
+        <ion-select-option value="Outros">Outros</ion-select-option>
+      </ion-select>
     </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="pet.idade" name="idade" required placeholder="Idade aproximado"></ion-input>
+
+    <ion-item *ngIf="dogsBreed">
+      <ion-label>Raça</ion-label>
+      <ion-select value="Outros" okText="Okay" [(ngModel)]="pet.raca" name="raca" cancelText="Dismiss">
+        <ion-select-option value="Bulldog Frances">Bulldog Frances</ion-select-option>
+        <ion-select-option value="Bulldog Ingles">Bulldog Ingles</ion-select-option>
+        <ion-select-option value="Golden Retriever">Golden Retriever</ion-select-option>
+        <ion-select-option value="Labrador">Labrador</ion-select-option>
+        <ion-select-option value="Lhasa Apso">Lhasa Apso</ion-select-option>
+        <ion-select-option value="Maltes">Maltes</ion-select-option>
+        <ion-select-option value="Pastor Alemão">Pastor Alemão</ion-select-option>
+        <ion-select-option value="Pinscher">Pinscher</ion-select-option>
+        <ion-select-option value="Pit Bull">Pit Bull</ion-select-option>
+        <ion-select-option value="Poodle">Poodle</ion-select-option>
+        <ion-select-option value="Pug">Pug</ion-select-option>
+        <ion-select-option value="Shih Tzu">Shih Tzu</ion-select-option>
+        <ion-select-option value="Rottweiler">Rottweiler</ion-select-option>
+        <ion-select-option value="Rusky Siberiano">Rusky Siberiano</ion-select-option>
+        <ion-select-option value="Yorkshire">Yorkshire</ion-select-option>
+        <ion-select-option value="Outros">Outros</ion-select-option>
+      </ion-select>
     </ion-item>
-    <ion-item>
-      <ion-input type="text" [(ngModel)]="pet.peso" name="peso" required placeholder="Peso aproximado"></ion-input>
+
+    <ion-item *ngIf="!dogsBreed">
+      <ion-label>Raça</ion-label>
+      <ion-select value="Outros" okText="Okay" name="petType" cancelText="Dismiss">
+        <ion-select-option value="Outros">Outros</ion-select-option>
+      </ion-select>
     </ion-item>
+
     <ion-item>
-      <ion-input type="text" [(ngModel)]="pet.raca" name="raca" required placeholder="Raça"></ion-input>
+      <ion-label>Nome</ion-label>
+      <ion-input style="text-align: right;" type="text" [(ngModel)]="pet.nome" name="nome" required placeholder="">
+      </ion-input>
     </ion-item>
+
     <ion-item>
-      <ion-textarea type="text" [(ngModel)]="pet.descricao" name="descricao" required
+      <ion-label>Idade</ion-label>
+      <ion-select value="0" okText="Okay" cancelText="Dismiss" [(ngModel)]="pet.idade" name="idade">
+        <ion-select-option *ngFor="let number of numbers" value="{{number}}">{{number}} anos</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Peso</ion-label>
+      <ion-select value="0" okText="Okay" cancelText="Dismiss" [(ngModel)]="pet.peso" name="peso">
+        <ion-select-option *ngFor="let number of numbers" value="{{number}}">{{number}} kg</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-textarea rows="6" cols="20" type="text" [(ngModel)]="pet.descricao" name="descricao" required
         placeholder="Observações sobre seu pet"></ion-textarea>
     </ion-item>
 

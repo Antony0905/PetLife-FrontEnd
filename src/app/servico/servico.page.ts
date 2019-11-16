@@ -208,7 +208,7 @@ export class ServicoPage implements OnInit {
     switch (this.anuncio.titulo) {
       case '1': {
         this.anuncio.titulo = 'Passeio de Pets';
-        this.anuncio.preco = '100.00';
+        this.anuncio.preco = '50.00';
         break;
       }
       case '2': {
@@ -218,12 +218,12 @@ export class ServicoPage implements OnInit {
       }
       case '3': {
         this.anuncio.titulo = 'Banho de Pets';
-        this.anuncio.preco = '50.00';
+        this.anuncio.preco = '30.00';
         break;
       }
       case '4': {
         this.anuncio.titulo = 'Tosa de Pets';
-        this.anuncio.preco = '50.00';
+        this.anuncio.preco = '30.00';
         break;
       }
       default: {

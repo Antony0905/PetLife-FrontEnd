@@ -7,6 +7,7 @@ import { UsuarioService } from 'src/services/usuario.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RouterPage } from '../services/abstract-router-page';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-tab2',
@@ -44,6 +45,10 @@ export class Tab2Page extends RouterPage implements OnDestroy {
         console.log(this.usuario);
         this.anuncioService.findByUserId(this.usuario.id).subscribe((response2) => {
           this.anuncios = response2;
+
+          this.anuncios.forEach(anuncio => {
+            anuncio.dataCadastroFormatted = moment(anuncio.dataCadastro).format('DD-MM-YYYY HH:MM:SS');
+          });
           console.log(this.anuncios);
         },
           error => {

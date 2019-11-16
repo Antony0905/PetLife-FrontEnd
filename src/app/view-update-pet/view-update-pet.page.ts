@@ -19,6 +19,9 @@ export class ViewUpdatePetPage implements OnInit {
   msgReturn: string;
   email: string;
 
+  dogsBreed = true;
+  numbers = new Array();
+
   constructor(
     public activatedRoute: ActivatedRoute,
     public navCtrl: NavController,
@@ -43,6 +46,10 @@ export class ViewUpdatePetPage implements OnInit {
       this.pet.peso = res.peso;
       this.pet.raca = res.raca;
       this.pet.descricao = res.descricao;
+      this.pet.petType = res.petType;
+      for (let index = 0; index <= 50; index++) {
+        this.numbers.push(index);
+      }
     });
   }
 
@@ -123,6 +130,16 @@ export class ViewUpdatePetPage implements OnInit {
         this.presentLoading();
         this.presentAlert(error.error);
       });
+  }
+
+  changeSelectBreeds(event) {
+
+    if ('Cachorro' === event.detail.value) {
+      this.dogsBreed = true;
+    } else {
+      this.dogsBreed = false;
+    }
+
   }
 
 }

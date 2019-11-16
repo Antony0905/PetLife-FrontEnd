@@ -14,5 +14,7 @@ export class UsuarioDTO {
     rate: number;
     dataAtualizacao: string;
     dataCadastro: string;
+    ddd: number;
+    telefone: number;
 
 }

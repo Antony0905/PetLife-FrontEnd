@@ -5,6 +5,7 @@ export class Anuncio {
     userId: string;
     preco: string;
     dataCadastro: string;
+    dataCadastroFormatted: string;
     dataAtualizacao: string;
     segunda: string;
     terca: string;

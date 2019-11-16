@@ -1,12 +1,18 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { API_CONFIG } from 'src/config/api.config';
 import { UsuarioDTO } from 'src/models/usuario.dto';
 import { Observable } from 'rxjs';
+import { AnunciantePet } from 'src/app/models/user.pet';
 
 @Injectable()
 export class UsuarioService {
 
+
+
+    findUserAndPetById(anuncianteId: string, petId: string): Observable<AnunciantePet> {
+        return this.http.get<AnunciantePet>(`${API_CONFIG.baseUrl}/findUserAndPetById/${anuncianteId}/${petId}`);
+    }
 
     constructor(public http: HttpClient) {
 
