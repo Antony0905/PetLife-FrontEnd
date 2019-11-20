@@ -35,6 +35,7 @@ export class ViewServicosContratadosPage implements OnInit {
   msgReturn: string;
   pet = new Pet();
   anunciante = new UsuarioDTO();
+  cliente = new UsuarioDTO();
 
   ngOnInit() {
   }
@@ -56,14 +57,11 @@ export class ViewServicosContratadosPage implements OnInit {
       this.agenda.isActive = res.isActive;
       this.agenda.serviceName = res.serviceName;
 
-      this.usuarioService.findUserAndPetById(this.agenda.anuncianteId, this.agenda.petId).subscribe(res2 => {
+      this.usuarioService.findUserAndPetById(this.agenda.anuncianteId, this.agenda.petId, this.agenda.clienteId).subscribe(res2 => {
 
         this.pet = res2.pet;
         this.anunciante = res2.anunciante;
-
-        console.log(res2);
-        console.log('pet ' + this.pet);
-        console.log('anunciante' + this.anunciante);
+        this.cliente = res2.cliente;
 
       },
         error => {
@@ -71,9 +69,6 @@ export class ViewServicosContratadosPage implements OnInit {
         });
 
     });
-
-    console.log('pet ' + this.pet);
-    console.log('anunciante' + this.anunciante);
 
   }
 
@@ -92,11 +87,19 @@ export class ViewServicosContratadosPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: ModrelatarproblemaPage,
       componentProps: {
-        anunciante: this.anunciante,
+        userReported: this.anunciante,
+        userReporter: this.cliente,
         agenda: this.agenda
       }
     });
     modal.present();
+  }
+
+  viewProfile() {
+
+    this.router.navigate(['/view-profile'], {
+      queryParams: this.anunciante
+    });
   }
 
 }

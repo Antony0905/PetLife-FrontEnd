@@ -8,14 +8,23 @@
 
 <ion-content>
 
-  <ion-item>
-    <ion-avatar>
-      <img src="../../assets/imgs/profile-default.png">
+  <ion-item *ngIf="userImage.base64 !== null">
+    <ion-avatar style="border: 2px solid #c5bdbd;width: 135px;height: 135px;border-radius: 27%;margin-bottom: 16%;">
+      <img style="width: 100%;height: 100%;border-radius: 27%;" src="{{userImage.base64}}">
+      <ion-icon (click)="PickFileAndGetBase64String()" class="ion-camera" name="camera"></ion-icon>
+    </ion-avatar>
+  </ion-item>
+
+  <ion-item *ngIf="userImage.base64 === null">
+    <ion-avatar style="border: 2px solid #c5bdbd;width: 135px;height: 135px;border-radius: 27%;margin-bottom: 16%;">
+      <img style="width: 100%;height: 100%;border-radius: 27%;"
+        src="../../assets/imgs/profile-default.jpg">
+      <ion-icon (click)="PickFileAndGetBase64String()" class="ion-camera" name="camera"></ion-icon>
     </ion-avatar>
   </ion-item>
 
   <ion-card *ngIf="!showEdit">
-    <ion-card-header>
+    <ion-card-header style="padding-top: 10px;">
       <ion-card-title style="font-family: monospace; color: #5d5d62;font-size: 36px;"> {{ usuario.nome }}
       </ion-card-title>
     </ion-card-header>
@@ -43,7 +52,8 @@
       <ion-input type="tel" maxlength="2" [(ngModel)]="usuario.ddd" name="ddd" required placeholder="DDD"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="tel" maxlength="9" [(ngModel)]="usuario.telefone" name="telefone" required placeholder="Telefone">
+      <ion-input type="tel" maxlength="9" [(ngModel)]="usuario.telefone" name="telefone" required
+        placeholder="Telefone">
       </ion-input>
     </ion-item>
     <ion-item>

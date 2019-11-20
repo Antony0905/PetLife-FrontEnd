@@ -5,13 +5,21 @@ import { AnuncioService } from 'src/services/anuncio.service';
 import { Pet } from '../models/pet';
 import { AuthenticationService } from '../services/authentication.service';
 import { PetService } from '../services/pet-service.service';
+import { RouterPage } from '../services/abstract-router-page';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
+import { Base64 } from '@ionic-native/base64/ngx';
+import { ImageService } from '../services/image.service';
+import { PetImage } from '../models/pet.image';
+import { Observable } from 'rxjs';
+import { UserImage } from '../models/user.image';
 
 @Component({
   selector: 'app-view-update-pet',
   templateUrl: './view-update-pet.page.html',
   styleUrls: ['./view-update-pet.page.scss'],
 })
-export class ViewUpdatePetPage implements OnInit {
+export class ViewUpdatePetPage extends RouterPage implements OnDestroy {
 
   pet = new Pet();
   showEdit = false;
@@ -22,6 +30,11 @@ export class ViewUpdatePetPage implements OnInit {
   dogsBreed = true;
   numbers = new Array();
 
+  files: Observable<any[]>;
+  petImage = new PetImage();
+  petImageSave = new PetImage();
+
+
   constructor(
     public activatedRoute: ActivatedRoute,
     public navCtrl: NavController,
@@ -30,13 +43,17 @@ export class ViewUpdatePetPage implements OnInit {
     public loadingController: LoadingController,
     public authService: AuthenticationService,
     public petService: PetService,
-    public router: Router
-  ) { }
-
-  ngOnInit() {
+    private router: Router,
+    private fileChooser: FileChooser,
+    private filePath: FilePath,
+    private base64: Base64,
+    private imageService: ImageService,
+    private route: ActivatedRoute
+  ) {
+    super(router, route);
   }
 
-  ionViewWillEnter() {
+  onEnter() {
     this.activatedRoute.queryParams.subscribe((res) => {
       this.pet.id = res.id;
       this.pet.userId = res.userId;
@@ -50,9 +67,13 @@ export class ViewUpdatePetPage implements OnInit {
       for (let index = 0; index <= 50; index++) {
         this.numbers.push(index);
       }
+
+      this.imageService.findByPetId(this.pet.id).subscribe(res2 => {
+        this.petImage = res2;
+      });
+
     });
   }
-
 
   atualizarPet() {
     this.petService.updatePet(this.pet)
@@ -64,7 +85,7 @@ export class ViewUpdatePetPage implements OnInit {
         error => {
           this.msgReturn = 'ERROR';
           this.presentLoading();
-          this.presentAlert(error.error);
+          this.presentAlert('Ocorreu erro ao atualizar o Pet. Por favor tente novamente mais tarde.');
         });
   }
 
@@ -115,7 +136,7 @@ export class ViewUpdatePetPage implements OnInit {
 
   dismissEditView() {
     this.showEdit = false;
-    this.ionViewWillEnter();
+    this.onEnter();
   }
 
   deletePet(id: string) {
@@ -123,12 +144,12 @@ export class ViewUpdatePetPage implements OnInit {
       this.msgReturn = 'SUCESSO';
       this.presentLoading();
       this.presentAlertDelete('Pet excluído com sucesso!');
-      this.ionViewWillEnter();
+      this.onEnter();
     },
       error => {
         this.msgReturn = 'ERROR';
         this.presentLoading();
-        this.presentAlert(error.error);
+        this.presentAlert('Ocorreu erro ao excluir o Pet. Por favor tente novamente mais tarde.');
       });
   }
 
@@ -141,5 +162,66 @@ export class ViewUpdatePetPage implements OnInit {
     }
 
   }
+
+  onDestroy() {
+    super.ngOnDestroy();
+  }
+
+  PickFileAndGetBase64String() {
+    this.fileChooser.open().then((fileuri) => {
+      this.filePath.resolveNativePath(fileuri).then((nativepath) => {
+        this.base64.encodeFile(nativepath).then((base64string) => {
+
+          this.petImageSave.petId = this.pet.id;
+          this.petImageSave.base64 = base64string;
+
+          this.imageService.savePetImage(this.petImageSave).subscribe(res => {
+            this.msgReturn = 'SUCESSO';
+            this.presentLoadingPhotoProfile();
+            console.log(res);
+            this.presentAlertPhotoProfile('Foto do Pet atualizada com sucesso.');
+          },
+            error => {
+              this.msgReturn = 'ERROR';
+              this.presentLoadingPhotoProfile();
+              this.presentAlert('Ocorreu erro ao atualizar foto do Pet. Por favor tente novamente mais tarde.');
+              console.log(error);
+            });
+        });
+      });
+    });
+
+  }
+
+  async presentLoadingPhotoProfile() {
+    const loading = await this.loadingController.create({
+      message: 'Atualizando foto de perfil',
+      duration: 2000
+    });
+    await loading.present();
+
+    const { role, data } = await loading.onDidDismiss();
+
+    console.log('Loading dismissed!');
+  }
+
+  async presentAlertPhotoProfile(mensagem) {
+    const alert = await this.alertController.create({
+      header: this.msgReturn,
+      message: mensagem,
+      buttons: [{
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(['/update-pet-profile'], {
+            queryParams: this.pet
+          });
+        }
+      }]
+    });
+
+    await setTimeout(() => { alert.present(); }, 2000);
+  }
+
+
 
 }

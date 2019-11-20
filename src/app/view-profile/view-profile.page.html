@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button color="danger"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar color="tertiary">
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-avatar>
+    <img src="../../assets/imgs/user-image-default.png">
+  </ion-avatar>
+  <ion-card-content style="text-align: center;font-size: 28px;font-weight: bold;font-family: cursive;">
+    {{ usuario.nome }} </ion-card-content>
+
+  <ion-item>
+    <ion-avatar style="margin: 0;width: 21px;height: 21px;margin-left: 1%;">
+      <img src="../../assets/icon/cake.jpg">
+    </ion-avatar>
+    <p class="p" style="margin-left: 21px;">Nascido em: {{usuario.dataNascimento}}</p>
+  </ion-item>
+  <ion-item>
+    <ion-icon class="icon" name="pin"></ion-icon>
+    <p class="p">{{usuario.cidade}} - {{usuario.estado}}</p>
+  </ion-item>
+  <ion-item>
+    <ion-icon class="icon" name="mail"></ion-icon>
+    <p class="p">{{usuario.email}}</p>
+  </ion-item>
+
+  <h1
+    style="margin-top: 7%;font-size: 18px;margin-left: 5%;border-bottom: 2px solid #0bb30b;margin-right: 5%;font-weight: bold;">
+    Avaliações</h1>
+
+  <ion-card style="border: 2px solid #d0d1d4;" *ngFor="let comentario of comentarios">
+    <ion-card-header>
+      <ion-card-title style="font-size: 17px;font-weight: normal;border-bottom: 1px solid #a29a9a;">
+        {{comentario.clientName}}
+        <span style="float: right;font-size: 15px;font-weight: bold;color: #7b7474;">{{comentario.dataCadastro}}</span>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content style="padding-top: 0;"> "{{comentario.comentario}}" </ion-card-content>
+  </ion-card>
+
+</ion-content>

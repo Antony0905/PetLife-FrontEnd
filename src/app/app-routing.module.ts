@@ -15,7 +15,10 @@ const routes: Routes = [
   { path: 'servicos-prestados', loadChildren: './servicos-prestados/servicos-prestados.module#ServicosPrestadosPageModule' },
   { path: 'view-servicos-prestados', loadChildren: './view-servicos-prestados/view-servicos-prestados.module#ViewServicosPrestadosPageModule' },
   { path: 'modfinalizar', loadChildren: './modfinalizar/modfinalizar.module#ModfinalizarPageModule' },
-  { path: 'modrelatarproblema', loadChildren: './modrelatarproblema/modrelatarproblema.module#ModrelatarproblemaPageModule' }
+  { path: 'modrelatarproblema', loadChildren: './modrelatarproblema/modrelatarproblema.module#ModrelatarproblemaPageModule' },
+  { path: 'view-profile', loadChildren: './view-profile/view-profile.module#ViewProfilePageModule' },
+  { path: 'update-profile', loadChildren: './update-profile/update-profile.module#UpdateProfilePageModule' },
+  { path: 'update-pet-profile', loadChildren: './update-pet-profile/update-pet-profile.module#UpdatePetProfilePageModule' }
 ];
 @NgModule({
   imports: [

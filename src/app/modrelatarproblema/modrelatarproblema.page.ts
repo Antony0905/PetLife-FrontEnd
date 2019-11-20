@@ -14,10 +14,13 @@ import { SuporteService } from 'src/services/suporte.service';
 })
 export class ModrelatarproblemaPage implements OnInit {
 
-  @Input() anunciante: UsuarioDTO;
+  @Input() userReporter: UsuarioDTO;
   @Input() agenda: Agenda;
+  @Input() userReported: UsuarioDTO;
+
   msgReturn: string;
   service = new EndServiceDTO();
+  userNameReported: string;
 
   constructor(
     private modalCtrl: ModalController,
@@ -28,12 +31,16 @@ export class ModrelatarproblemaPage implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.userNameReported = this.userReported.nome;
+
   }
 
   relatar() {
 
     this.service.agendaId = this.agenda.id;
-    this.service.anuncianteId = this.anunciante.id;
+    this.service.userReported = this.userReported.email;
+    this.service.userReporter = this.userReporter.email;
 
     console.log('comentario: ' + this.service.comentario);
     this.suporteService.relatarProblema(this.service).subscribe((response) => {
@@ -60,7 +67,7 @@ export class ModrelatarproblemaPage implements OnInit {
         text: 'OK',
         handler: () => {
           this.close();
-          this.router.navigate(['/servicos-contratados']);
+          this.router.navigate(['/tabs/tabs/tab4']);
         }
       }]
     });

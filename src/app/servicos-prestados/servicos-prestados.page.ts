@@ -29,6 +29,7 @@ export class ServicosPrestadosPage implements OnInit {
   agendas: Agenda[];
   email;
   usuario = new UsuarioDTO();
+  showServices = 'andamento';
 
   ngOnInit() {
   }
@@ -54,6 +55,18 @@ export class ServicosPrestadosPage implements OnInit {
           return null;
         });
     });
+  }
+
+  changeSelected(event) {
+
+    if ('todos' === event.detail.value) {
+      this.showServices = 'todos';
+    } else if ('concluido' === event.detail.value) {
+      this.showServices = 'concluido';
+    } else {
+      this.showServices = 'andamento';
+    }
+
   }
 
   viewServico(agenda: Agenda) {

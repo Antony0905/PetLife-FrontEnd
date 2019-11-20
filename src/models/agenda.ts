@@ -4,6 +4,7 @@ export class Agenda {
     anuncianteId: string;
     anuncioId: string;
     userNameAnuncio: string;
+    userNameCliente: string;
     petId: string;
     dataCadastro: string;
     data: string;

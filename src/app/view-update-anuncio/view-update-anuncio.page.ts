@@ -105,7 +105,7 @@ export class ViewUpdateAnuncioPage implements OnInit {
         error => {
           this.msgReturn = 'ERROR';
           this.presentLoading();
-          this.presentAlert(error.error);
+          this.presentAlert('Ocorreu erro ao atualizar o anuncio. Por favor tente novamente mais tarde.');
           console.log(error);
         });
   }
@@ -219,7 +219,7 @@ export class ViewUpdateAnuncioPage implements OnInit {
       error => {
         this.msgReturn = 'ERROR';
         this.presentLoading();
-        this.presentAlert(error.error);
+        this.presentAlert('Ocorreu erro ao excluir o anuncio. Por favor tente novamente mais tarde.');
         console.log(error);
       });
   }

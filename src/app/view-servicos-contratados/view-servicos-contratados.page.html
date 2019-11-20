@@ -22,7 +22,8 @@
     <ion-card-content> <span class="span-color">Serviço:</span> {{ agenda.serviceName }} </ion-card-content>
     <ion-card-content> <span class="span-color">Data:</span> {{ agenda.data }} às {{agenda.horario}}:00 hrs
     </ion-card-content>
-    <ion-card-content> <span class="span-color">Forma de Pagamento:</span> {{ agenda.formaPagamento }} </ion-card-content>
+    <ion-card-content> <span class="span-color">Forma de Pagamento:</span> {{ agenda.formaPagamento }}
+    </ion-card-content>
     <h5 style="float: right;margin-right: 7%;color: #2ca929;font-weight: bold;">R$ {{agenda.preco}},00</h5>
 
   </ion-card>
@@ -31,7 +32,9 @@
       <ion-card-title> Anunciante </ion-card-title>
     </ion-card-header>
 
-    <ion-card-content> <span class="span-color">Nome:</span> {{anunciante.nome}} </ion-card-content>
+    <ion-card-content> <span class="span-color">Nome:</span> <span
+        style="margin-top: 0px;font-size: 18px;margin-left:2%;text-decoration: underline;color: #0675c3;"
+        (click)="viewProfile()">{{anunciante.nome}}</span> </ion-card-content>
     <ion-card-content> <span class="span-color">Contato:</span> {{anunciante.ddd}}{{anunciante.telefone}}
     </ion-card-content>
     <ion-card-content> <span class="span-color">Bairro:</span> {{anunciante.bairro}} </ion-card-content>

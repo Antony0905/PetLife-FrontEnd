@@ -87,7 +87,7 @@ export class ServicoPage implements OnInit {
             error => {
               this.msgReturn = 'ERROR';
               this.presentLoading();
-              this.presentAlert(error.error);
+              this.presentAlert('Ocorreu erro ao cadastrar o anuncio. Por favor tente novamente mais tarde.');
               console.log(error);
             });
       },

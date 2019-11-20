@@ -31,7 +31,7 @@ export class ViewAnuncioPage extends RouterPage implements OnDestroy {
     public petService: PetService,
     private router: Router,
     private route: ActivatedRoute,
-    private weekService: WeekService
+    private weekService: WeekService,
   ) {
     super(router, route);
   }
@@ -201,6 +201,7 @@ export class ViewAnuncioPage extends RouterPage implements OnDestroy {
       this.agenda.anuncioId = this.anuncio.id;
       this.agenda.preco = String(this.precoUnitario);
       this.agenda.userNameAnuncio = this.usuarioAnunciante.nome;
+      this.agenda.userNameCliente = this.usuario.nome;
       this.agenda.serviceName = this.anuncio.titulo;
 
       for (const x of this.disponibleDays) {
@@ -218,7 +219,7 @@ export class ViewAnuncioPage extends RouterPage implements OnDestroy {
               error => {
                 this.msgReturn = 'ERROR';
                 this.presentLoading();
-                this.presentAlert(error.error);
+                this.presentAlert('Ocorreu erro ao finalizar o agendamento. Por favor tente novamente mais tarde.');
                 console.log(error);
               });
         }
@@ -228,6 +229,12 @@ export class ViewAnuncioPage extends RouterPage implements OnDestroy {
 
   onDestroy() {
     super.ngOnDestroy();
+  }
+
+  viewProfile() {
+    this.router.navigate(['/view-profile'], {
+      queryParams: this.usuarioAnunciante
+    });
   }
 
 }

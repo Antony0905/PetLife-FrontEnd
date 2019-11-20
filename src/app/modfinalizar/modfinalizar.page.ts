@@ -27,8 +27,6 @@ export class ModfinalizarPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.anunciante);
-    console.log(this.agenda);
 
   }
 
@@ -62,7 +60,7 @@ export class ModfinalizarPage implements OnInit {
         text: 'OK',
         handler: () => {
           this.close();
-          this.router.navigate(['/servicos-contratados']);
+          this.router.navigate(['/tabs/tabs/tab4']);
         }
       }]
     });

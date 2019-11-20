@@ -66,7 +66,7 @@ export class RegisterPetPage implements OnInit {
             error => {
               this.msgReturn = 'ERROR';
               this.presentLoading();
-              this.presentAlert(error.error);
+              this.presentAlert('Ocorreu erro ao registrar o Pet. Por favor tente novamente mais tarde.');
             });
       },
         error => {

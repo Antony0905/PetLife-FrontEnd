@@ -10,8 +10,8 @@ export class UsuarioService {
 
 
 
-    findUserAndPetById(anuncianteId: string, petId: string): Observable<AnunciantePet> {
-        return this.http.get<AnunciantePet>(`${API_CONFIG.baseUrl}/findUserAndPetById/${anuncianteId}/${petId}`);
+    findUserAndPetById(anuncianteId: string, petId: string, clienteId: string): Observable<AnunciantePet> {
+        return this.http.get<AnunciantePet>(`${API_CONFIG.baseUrl}/findUserAndPetById/${anuncianteId}/${petId}/${clienteId}`);
     }
 
     constructor(public http: HttpClient) {
