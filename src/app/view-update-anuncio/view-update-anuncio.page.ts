@@ -64,6 +64,7 @@ export class ViewUpdateAnuncioPage implements OnInit {
       this.anuncio.horario2 = res.horario2;
       this.anuncio.horario3 = res.horario3;
       this.anuncio.expirationTime = res.expirationTime;
+      this.anuncio.userName = res.userName;
 
       console.log(this.anuncio.isActive);
       if (this.anuncio.isActive !== '1') {

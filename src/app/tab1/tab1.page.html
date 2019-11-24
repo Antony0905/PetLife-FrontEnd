@@ -7,16 +7,35 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let anuncio of anuncios" (click)="viewAnuncio(anuncio)">
+
+  <ion-list>
     <ion-item>
+      <ion-list-header style="width: 20%;">Filtro</ion-list-header>
+      <ion-select (ionChange)="changeSelectedCity($event)" placeholder="Cidade" interface="popover" style="width: 40%;">
+        <ion-select-option *ngFor="let cidade of cidades" value="{{cidade}}">{{cidade}}</ion-select-option>
+      </ion-select>
+      <ion-select (ionChange)="changeSelectedService($event)" placeholder="Serviço" interface="popover" style="width: 40%;">
+        <ion-select-option value="Passeio de Pets">Passeio de Pets</ion-select-option>
+        <ion-select-option value="Tosa de Pets">Tosa de Pets</ion-select-option>
+        <ion-select-option value="Banho de Pets">Banho de Pets</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-card *ngFor="let anuncio of anuncios">
+    <ion-item style="height: 150px;" (click)="viewAnuncio(anuncio)">
       <img src="../../assets/imgs/{{anuncio.titulo}}.png">
     </ion-item>
-    <ion-item>
-        <h2 class="h2-titulo-anuncio">{{anuncio.titulo}}</h2>
-        <h2 class="h2-preco">R$ {{anuncio.preco}}</h2>
+    <ion-item (click)="viewAnuncio(anuncio)">
+      <h2 class="h2-titulo-anuncio">{{anuncio.titulo}}</h2>
     </ion-item>
-    <ion-card-content>
-        <p>{{anuncio.descricao}}</p>
-      </ion-card-content>
+    <ion-card-content style="padding-bottom: 0px;padding-top: 10px;" (click)="viewAnuncio(anuncio)">
+      <h6 style="font-size: 17px;padding-left: 2%;">{{anuncio.descricao}}</h6>
+    </ion-card-content>
+    <ion-item>
+      <h1 class="h1-name" (click)="viewProfile(anuncio.userId)"> {{anuncio.userName}}</h1>
+      <h2 class="h2-preco">R$ {{anuncio.preco}},00</h2>
+    </ion-item>
   </ion-card>
 </ion-content>

@@ -6,6 +6,7 @@ import { Pet } from '../models/pet';
 import { PetService } from '../services/pet-service.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register-pet',
@@ -22,6 +23,7 @@ export class RegisterPetPage implements OnInit {
   usuario = new UsuarioDTO();
   numbers = new Array();
   dogsBreed = true;
+  public PetGroup: FormGroup;
 
   constructor(
     public navCtrl: NavController,
@@ -30,7 +32,8 @@ export class RegisterPetPage implements OnInit {
     public loadingController: LoadingController,
     public petService: PetService,
     public authService: AuthenticationService,
-    private router: Router
+    private router: Router,
+    private PetBuilder: FormBuilder
   ) {
 
     for (let index = 0; index <= 50; index++) {
@@ -39,6 +42,22 @@ export class RegisterPetPage implements OnInit {
 
     this.pet.petType = 'Cachorro';
     this.pet.raca = 'Outros';
+
+    this.PetGroup = this.PetBuilder.group({
+
+      'nome': [this.pet.nome, Validators.compose([
+        Validators.required
+      ])],
+      'idade': [this.pet.idade, Validators.compose([
+        Validators.required])],
+      'peso': [this.pet.peso, Validators.compose([
+        Validators.required])],
+      'Raca': [this.pet.raca, Validators.compose([
+        Validators.required])],
+      'tipo': [this.pet.petType, null],
+      'descricao': [this.pet.descricao, null],
+
+    });
 
   }
 

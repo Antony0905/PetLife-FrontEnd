@@ -12,9 +12,20 @@
 
 <ion-content>
 
-  <ion-avatar>
-    <img src="../../assets/imgs/user-image-default.png">
-  </ion-avatar>
+  <ion-item *ngIf="userImage.base64 !== null">
+    <ion-avatar style="border: 2px solid #c5bdbd;width: 135px;height: 135px;border-radius: 27%;margin-bottom: 16%;">
+      <img style="width: 100%;height: 100%;border-radius: 27%;" src="{{userImage.base64}}">
+    </ion-avatar>
+  </ion-item>
+
+  <ion-item *ngIf="userImage.base64 === null">
+    <ion-avatar style="border: 2px solid #c5bdbd;width: 135px;height: 135px;border-radius: 27%;margin-bottom: 16%;">
+      <img style="width: 100%;height: 100%;border-radius: 27%;"
+        src="../../assets/imgs/profile-default.jpg">
+    </ion-avatar>
+  </ion-item>
+
+
   <ion-card-content style="text-align: center;font-size: 28px;font-weight: bold;font-family: cursive;">
     {{ usuario.nome }} </ion-card-content>
 

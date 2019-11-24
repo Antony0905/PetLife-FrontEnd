@@ -72,6 +72,7 @@ export class ServicoPage implements OnInit {
 
         this.usuario = response;
         this.anuncio.userId = this.usuario.id;
+        this.anuncio.userName = this.usuario.nome;
         this.anuncio.expirationTime = this.tempoAnuncio;
 
         this.validateHours();

@@ -6,6 +6,7 @@ import { UsuarioService } from 'src/services/usuario.service';
 import { Endereco } from '../models/endereco';
 import { CepService } from '../services/cep.service';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ export class RegisterPage implements OnInit {
   dataFromService: any = '';
   user = new UsuarioDTO();
   endereco = new Endereco();
+  public fGroup: FormGroup;
 
   constructor(
     public navCtrl: NavController,
@@ -25,7 +27,38 @@ export class RegisterPage implements OnInit {
     public alertController: AlertController,
     public cepService: CepService,
     public loadingController: LoadingController,
-    private router: Router) {
+    private router: Router,
+    private fBuilder: FormBuilder) {
+
+    this.fGroup = this.fBuilder.group({
+
+      'nome': [this.user.nome, Validators.compose([
+        Validators.required
+      ])],
+      'dataNascimento': [this.user.dataNascimento, Validators.compose([
+        Validators.required])],
+      'ddd': [this.user.ddd, Validators.compose([
+        Validators.required])],
+      'telefone': [this.user.telefone, Validators.compose([
+        Validators.required, Validators.minLength(9), Validators.maxLength(9)])],
+      'email': [this.user.email, Validators.compose([
+        Validators.required])],
+      'Password': [this.user.password, Validators.compose([
+        Validators.required])],
+      'cep': [this.user.cep],
+      'logradouro': [this.user.logradouro, Validators.compose([
+        Validators.required])],
+      'numero': [this.user.numero, Validators.compose([
+        Validators.required])],
+      'complemento': [this.user.complemento, Validators.compose([])],
+      'Bairro': [this.user.bairro, Validators.compose([
+        Validators.required])],
+      'cidade': [this.user.cidade, Validators.compose([
+        Validators.required])],
+      'estado': [this.user.estado, Validators.compose([
+        Validators.required])]
+    })
+
 
   }
 
@@ -50,6 +83,9 @@ export class RegisterPage implements OnInit {
           console.log(error);
 
         });
+
+    this.fGroup.valid
+    console.log(this.fGroup.value);
   }
 
   async presentAlert(mensagem) {

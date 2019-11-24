@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController, AlertController } from '@ionic/angular';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { NavController, LoadingController, AlertController, Platform } from '@ionic/angular';
 import { Authenticate } from 'src/models/authenticate';
 import { AuthenticateService } from 'src/services/authenticate.service';
 import { AuthenticateResponse } from 'src/models/authenticate.response';
@@ -11,10 +11,11 @@ import { GlobalParameters } from '../config/global-parameters';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
 
   msgHeader: string = '';
   msgBody: string = '';
+  backButtonSubscription;
 
   auth: Authenticate = {
     email: '',
@@ -29,10 +30,25 @@ export class HomePage implements OnInit {
     public alertController: AlertController,
     public loadingController: LoadingController,
     public authService: AuthenticationService,
-    public parameters: GlobalParameters) { }
+    public parameters: GlobalParameters,
+    public platform: Platform
+  ) {
+
+    //this.backButtonSubscription = this.platform.backButton.subscribeWithPriority(666666, () => {
+
+      //alert(this.constructor.name);
+      //if (this.constructor.name === 'HomePage') {
+        //if (window.confirm('Deseja realmente sair do app?')) {
+          //navigator['app'].exitApp();
+        //}
+      //}
+    //});
+
+  }
 
   ngOnInit() {
   }
+
 
   login() {
 
@@ -87,6 +103,10 @@ export class HomePage implements OnInit {
     const { role, data } = await loading.onDidDismiss();
 
     console.log('Loading dismissed!');
+  }
+
+  ngOnDestroy() {
+    this.backButtonSubscription.unsubscribe();
   }
 
 }

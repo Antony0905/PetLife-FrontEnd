@@ -27,6 +27,7 @@ import { ComentarioService } from './services/comentario.service';
 import { PetService } from './services/pet-service.service';
 import { UploadFileService } from './services/upload-file.service';
 import { ImageService } from './services/image.service';
+import { BrMaskerModule } from 'br-mask';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { ImageService } from './services/image.service';
     AppRoutingModule,
     IonicStorageModule.forRoot(),
     IonicRatingModule,
-    FormsModule
+    FormsModule,
+    BrMaskerModule
   ],
   providers: [
     StatusBar,

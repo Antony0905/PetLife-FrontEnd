@@ -3,6 +3,7 @@ export class Anuncio {
     titulo: string;
     descricao: string;
     userId: string;
+    userName: string;
     preco: string;
     dataCadastro: string;
     dataCadastroFormatted: string;

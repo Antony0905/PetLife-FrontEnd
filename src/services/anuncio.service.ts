@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { API_CONFIG } from 'src/config/api.config';
@@ -25,6 +25,15 @@ export class AnuncioService {
 
     findAll(): Observable<Anuncio[]> {
         return this.http.get<Anuncio[]>(`${API_CONFIG.baseUrl}/getAnuncios`);
+    }
+
+    findAllWithParameters(cidade: string, servico: string): Observable<Anuncio[]> {
+
+        let params = new HttpParams();
+        params = params.append('cidade', cidade);
+        params = params.append('servico', servico);
+
+        return this.http.get<Anuncio[]>(`${API_CONFIG.baseUrl}/getAnunciosByCityAndService`, { params: params });
     }
 
     findByUserId(userId: string): Observable<Anuncio[]> {

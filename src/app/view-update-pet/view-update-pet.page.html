@@ -6,22 +6,23 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="tertiary">
-    <ion-title>Informações Do Seu Pet</ion-title>
+    <ion-title style="text-align: center;">Informações Do Seu Pet</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
 
   <ion-item *ngIf="petImage.base64 !== null">
-    <ion-avatar style="margin:auto;margin-top: 7%;border: 2px solid #c5bdbd;width: 135px;height: 135px;border-radius: 27%;margin-bottom: 16%;">
+    <ion-avatar
+      style="margin:auto;margin-top: 7%;border: 2px solid #c5bdbd;width: 135px;height: 135px;border-radius: 27%;margin-bottom: 16%;">
       <img style="width: 100%;height: 100%;border-radius: 27%;" src="{{petImage.base64}}">
       <ion-icon (click)="PickFileAndGetBase64String()" class="ion-camera" name="camera"></ion-icon>
     </ion-avatar>
   </ion-item>
 
   <ion-item *ngIf="petImage.base64 === null">
-    <ion-avatar style="margin:auto;margin-top: 7%;border: 2px solid #c5bdbd;width: 135px;height: 135px;border-radius: 27%;margin-bottom: 16%;">
-      <img style="width: 100%;height: 100%;border-radius: 27%;"
-        src="../../assets/imgs/pet-profile-default.jpg">
+    <ion-avatar
+      style="margin:auto;margin-top: 7%;border: 2px solid #c5bdbd;width: 135px;height: 135px;border-radius: 27%;margin-bottom: 16%;">
+      <img style="width: 100%;height: 100%;border-radius: 27%;" src="../../assets/imgs/pet-profile-default.jpg">
       <ion-icon (click)="PickFileAndGetBase64String()" class="ion-camera" name="camera"></ion-icon>
     </ion-avatar>
   </ion-item>
@@ -54,11 +55,12 @@
   </ion-card>
 
 
-  <form *ngIf="showEdit">
+  <form *ngIf="showEdit" [formGroup]="AtpetGroup">
 
     <ion-item (ionChange)="changeSelectBreeds($event)" disabled="true">
       <ion-label>Pet</ion-label>
-      <ion-select value="Cachorro" okText="Okay" [(ngModel)]="pet.petType" name="petType" cancelText="Dismiss">
+      <ion-select value="Cachorro" okText="Okay" [(ngModel)]="pet.petType" name="petType" cancelText="Dismiss"
+        formControlName="tipo">
         <ion-select-option value="Cachorro">Cachorro</ion-select-option>
         <ion-select-option value="Gato">Gato</ion-select-option>
         <ion-select-option value="Outros">Outros</ion-select-option>
@@ -67,7 +69,8 @@
 
     <ion-item *ngIf="dogsBreed">
       <ion-label>Raça</ion-label>
-      <ion-select value="Outros" okText="Okay" [(ngModel)]="pet.raca" name="raca" cancelText="Dismiss">
+      <ion-select value="Outros" okText="Okay" [(ngModel)]="pet.raca" name="raca" cancelText="Dismiss"
+        formControlName="Raca">
         <ion-select-option value="Bulldog Frances">Bulldog Frances</ion-select-option>
         <ion-select-option value="Bulldog Ingles">Bulldog Ingles</ion-select-option>
         <ion-select-option value="Golden Retriever">Golden Retriever</ion-select-option>
@@ -96,26 +99,29 @@
 
     <ion-item>
       <ion-label>Nome</ion-label>
-      <ion-input style="text-align: right;" type="text" [(ngModel)]="pet.nome" name="nome" required placeholder="">
+      <ion-input style="text-align: right;" type="text" [(ngModel)]="pet.nome" name="nome" required placeholder=""
+        formControlName="nome">
       </ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Idade</ion-label>
-      <ion-select value="{{pet.idade}}" okText="Okay" cancelText="Dismiss" [(ngModel)]="pet.idade" name="idade">
+      <ion-select value="{{pet.idade}}" okText="Okay" cancelText="Dismiss" [(ngModel)]="pet.idade" name="idade"
+        formControlName="idade">
         <ion-select-option *ngFor="let number of numbers" value="{{number}}">{{number}} anos</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label>Peso</ion-label>
-      <ion-select value="{{pet.peso}}" okText="Okay" cancelText="Dismiss" [(ngModel)]="pet.peso" name="peso">
+      <ion-select value="{{pet.peso}}" okText="Okay" cancelText="Dismiss" [(ngModel)]="pet.peso" name="peso"
+        formControlName="peso">
         <ion-select-option *ngFor="let number of numbers" value="{{number}}">{{number}} kg</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-textarea rows="6" cols="20" type="text" [(ngModel)]="pet.descricao" name="descricao" required
-        placeholder="Observações sobre seu pet"></ion-textarea>
+        placeholder="Observações sobre seu pet" formControlName="descricao"></ion-textarea>
     </ion-item>
     <ion-grid>
       <ion-row>
@@ -123,7 +129,8 @@
           <ion-button (click)="dismissEditView()" color="danger" expand="block">Cancelar</ion-button>
         </ion-col>
         <ion-col>
-          <ion-button (click)="atualizarPet()" color="primary" expand="block">Atualizar</ion-button>
+          <ion-button (click)="atualizarPet()" color="primary" expand="block" [disabled]="!AtpetGroup.valid">Atualizar
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>

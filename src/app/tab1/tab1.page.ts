@@ -3,6 +3,8 @@ import { AlertController, LoadingController, NavController } from '@ionic/angula
 import { Anuncio } from 'src/models/anuncio';
 import { AnuncioService } from 'src/services/anuncio.service';
 import { Router } from '@angular/router';
+import { UsuarioService } from 'src/services/usuario.service';
+import { UsuarioDTO } from 'src/models/usuario.dto';
 
 @Component({
   selector: 'app-tab1',
@@ -16,19 +18,44 @@ export class Tab1Page {
     public anuncioService: AnuncioService,
     public alertController: AlertController,
     public loadingController: LoadingController,
-    private router: Router) { }
+    private router: Router,
+    private usuarioService: UsuarioService) { }
 
   anuncios: Anuncio[];
+  usuario = new UsuarioDTO();
+  cidades: string[];
+  cidade = '';
+  servico = '';
 
   ionViewWillEnter() {
 
-    this.anuncioService.findAll().subscribe((response) => {
-      this.anuncios = response;
-      console.log(this.anuncios);
-    },
-      error => {
-        console.log(error);
-      });
+    console.log('Cidade e servico' + this.servico + this.cidade);
+
+    if (this.cidade === '' && this.servico === '') {
+      this.anuncioService.findAll().subscribe((response) => {
+        this.anuncios = response;
+        console.log(this.anuncios);
+      },
+        error => {
+          console.log(error);
+        });
+    } else {
+
+      console.log('Entrou no filtro ' + this.servico + this.cidade);
+      this.anuncioService.findAllWithParameters(this.cidade, this.servico).subscribe(res => {
+        this.anuncios = res;
+        console.log(this.anuncios);
+      },
+        error => {
+          console.log(error);
+        });
+    }
+
+
+    this.usuarioService.findAllCities().subscribe(res => {
+      this.cidades = res;
+      console.log(this.cidades);
+    });
   }
 
   viewAnuncio(anuncio: Anuncio) {
@@ -38,5 +65,29 @@ export class Tab1Page {
     });
   }
 
+  viewProfile(userId: string) {
+
+    console.log(userId);
+    this.usuarioService.findUserById(userId).subscribe(res => {
+
+      this.usuario = res;
+
+      this.router.navigate(['/view-profile'], {
+        queryParams: this.usuario
+      });
+    });
+  }
+
+  changeSelectedCity(event) {
+    this.cidade = event.detail.value;
+    console.log(event.detail.value);
+    this.ionViewWillEnter();
+  }
+
+  changeSelectedService(event) {
+    this.servico = event.detail.value;
+    console.log(event.detail.value);
+    this.ionViewWillEnter();
+  }
 
 }

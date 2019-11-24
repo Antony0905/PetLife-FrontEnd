@@ -14,6 +14,10 @@ export class UsuarioService {
         return this.http.get<AnunciantePet>(`${API_CONFIG.baseUrl}/findUserAndPetById/${anuncianteId}/${petId}/${clienteId}`);
     }
 
+    findAllCities(): Observable<string[]> {
+        return this.http.get<string[]>(`${API_CONFIG.baseUrl}/getAllCities`);
+    }
+
     constructor(public http: HttpClient) {
 
     }

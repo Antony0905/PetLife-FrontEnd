@@ -12,7 +12,7 @@ import { Base64 } from '@ionic-native/base64/ngx';
 import { ImageService } from '../services/image.service';
 import { PetImage } from '../models/pet.image';
 import { Observable } from 'rxjs';
-import { UserImage } from '../models/user.image';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-view-update-pet',
@@ -33,6 +33,7 @@ export class ViewUpdatePetPage extends RouterPage implements OnDestroy {
   files: Observable<any[]>;
   petImage = new PetImage();
   petImageSave = new PetImage();
+  public AtpetGroup: FormGroup;
 
 
   constructor(
@@ -48,9 +49,24 @@ export class ViewUpdatePetPage extends RouterPage implements OnDestroy {
     private filePath: FilePath,
     private base64: Base64,
     private imageService: ImageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private AtpetBuilder: FormBuilder
   ) {
     super(router, route);
+    this.AtpetGroup = this.AtpetBuilder.group({
+
+      'nome': [this.pet.nome, Validators.compose([
+        Validators.required
+      ])],
+      'idade': [this.pet.idade, Validators.compose([
+        Validators.required])],
+      'peso': [this.pet.peso, Validators.compose([
+        Validators.required])],
+      'Raca': [this.pet.raca, Validators.compose([
+        Validators.required])],
+      'tipo': [this.pet.petType, null],
+      'descricao': [this.pet.descricao, null],
+    });
   }
 
   onEnter() {
@@ -195,7 +211,7 @@ export class ViewUpdatePetPage extends RouterPage implements OnDestroy {
 
   async presentLoadingPhotoProfile() {
     const loading = await this.loadingController.create({
-      message: 'Atualizando foto de perfil',
+      message: 'Atualizando foto do Pet',
       duration: 2000
     });
     await loading.present();

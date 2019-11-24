@@ -4,17 +4,37 @@
 }
 
 .h2-preco{
+  margin-bottom: 0px;
+  margin-top: 0px;
+  font-size: 20px;
+  padding-right: 10px;
   width: 150px;
   text-align: right;
   color: green;
+  font-weight: bold;
 }
 
 .h2-titulo-anuncio{
   width: 100%;
+  text-align: center;
+  color: #8a8080;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 ion-title {
   text-align: center;
   font-weight: bold;
   color: white;
+}
+
+.h1-name{
+  margin-top: 0px;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: underline;
+    color: #0675c3;
+    width: 70%;
+    margin-bottom: 0px;
+    padding-left: 10px;
 }

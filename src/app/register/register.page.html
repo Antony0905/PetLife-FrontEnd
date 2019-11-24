@@ -12,60 +12,91 @@
     <img style="width: 73%;" src="../../assets/imgs/petrun.jpg" alt="logo">
   </div>
 
-  <form>
+  <script>
+    $('#myForm').validator();
+    $('#ddd').mask("99");
+    $('#telefone').mask("999999999");
+
+  </script>
+  <form [formGroup]="fGroup" id="myForm">
     <ion-item>
-      <ion-input type="text" [(ngModel)]="user.nome" name="nome" required placeholder="Nome"></ion-input>
+      <span class="obrigatorio">*</span>
+      <ion-input type="text" [(ngModel)]="user.nome" name="nome" required placeholder="Nome" formControlName="nome">
+      </ion-input>
     </ion-item>
     <ion-item>
+      <span class="obrigatorio">*</span>
       <ion-label>Data de Nascimento</ion-label>
       <ion-datetime displayFormat="DD MM YYYY" [(ngModel)]="user.dataNascimento" name="dataNascimento"
-        placeholder="DD MM YYYY">
+        placeholder="DD MM YYYY" formControlName="dataNascimento">
       </ion-datetime>
     </ion-item>
+
     <ion-item>
-      <ion-input type="tel" maxlength="2" [(ngModel)]="user.ddd" name="ddd" required placeholder="DDD"></ion-input>
+      <span class="obrigatorio">*</span>
+      <ion-input type="text" [(ngModel)]="user.ddd" name="ddd" [brmasker]="{mask:'00', len:2,type:'num'}"
+        placeholder="DDD" formControlName="ddd" required>
+      </ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="tel" maxlength="9" [(ngModel)]="user.telefone" name="telefone" required placeholder="Telefone"></ion-input>
+      <span class="obrigatorio">*</span>
+      <ion-input type="text" [(ngModel)]="user.telefone" name="telefone" id="telefone"
+        [brmasker]="{mask:'000000000', len:9,type:'num'}" required placeholder="Telefone" formControlName="telefone">
+      </ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="user.email" name="email" required placeholder="E-mail"></ion-input>
+      <span class="obrigatorio">*</span>
+      <ion-input type="text" [(ngModel)]="user.email" name="email" required placeholder="E-mail"
+        formControlName="email"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="password" [(ngModel)]="user.password" name="password" required placeholder="Password">
+      <span class="obrigatorio">*</span>
+      <ion-input type="password" [(ngModel)]="user.password" name="password" required placeholder="Senha"
+        formControlName="Password">
       </ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-input (ionBlur)="buscarEndereco()" type="text" [(ngModel)]="user.cep" name="cep" required placeholder="Cep">
+      <span class="obrigatorio">*</span>
+      <ion-input (ionBlur)="buscarEndereco()" type="text" [(ngModel)]="user.cep" required placeholder="CEP"
+        formControlName="cep">
       </ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" disabled="true" [(ngModel)]="user.logradouro" name="logradouro" required
-        placeholder="Logradouro">
+      <span class="obrigatorio">*</span>
+      <ion-input type="text" disabled="true" [(ngModel)]="user.logradouro" required placeholder="Logradouro"
+        formControlName="logradouro">
       </ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="user.numero" name="numero" required placeholder="Nº">
+      <span class="obrigatorio">*</span>
+      <ion-input type="text" [(ngModel)]="user.numero" name="numero" required placeholder="Nº" formControlName="numero">
       </ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" [(ngModel)]="user.complemento" name="complemento" required placeholder="Complemento">
+      <ion-input type="text" [(ngModel)]="user.complemento" name="complemento" placeholder="Complemento"
+        formControlName="complemento">
       </ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" disabled="true" [(ngModel)]="user.bairro" name="bairro" required placeholder="Bairro">
+      <span class="obrigatorio">*</span>
+      <ion-input type="text" disabled="true" [(ngModel)]="user.bairro" required placeholder="Bairro"
+        formControlName="Bairro">
       </ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" disabled="true" [(ngModel)]="user.cidade" name="cidade" required placeholder="Cidade">
+      <span class="obrigatorio">*</span>
+      <ion-input type="text" disabled="true" [(ngModel)]="user.cidade" required placeholder="Cidade"
+        formControlName="cidade">
       </ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" disabled="true" [(ngModel)]="user.estado" name="estado" required placeholder="Estado">
+      <span class="obrigatorio">*</span>
+      <ion-input type="text" disabled="true" [(ngModel)]="user.estado" required placeholder="Estado"
+        formControlName="estado">
       </ion-input>
     </ion-item>
-    <ion-button expand="block" (click)="registrar()">Cadastrar</ion-button>
+    <ion-button (click)="registrar()" expand="full" [disabled]="!fGroup.valid"> Cadastrar</ion-button>
   </form>
 
 </ion-content>
