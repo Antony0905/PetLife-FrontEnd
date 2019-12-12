@@ -12,9 +12,12 @@
     <ion-item>
       <ion-list-header style="width: 20%;">Filtro</ion-list-header>
       <ion-select (ionChange)="changeSelectedCity($event)" placeholder="Cidade" interface="popover" style="width: 40%;">
+        <ion-select-option value="Todos">Todos</ion-select-option>
         <ion-select-option *ngFor="let cidade of cidades" value="{{cidade}}">{{cidade}}</ion-select-option>
       </ion-select>
-      <ion-select (ionChange)="changeSelectedService($event)" placeholder="Serviço" interface="popover" style="width: 40%;">
+      <ion-select (ionChange)="changeSelectedService($event)" placeholder="Serviço" interface="popover"
+        style="width: 40%;">
+        <ion-select-option value="Todos">Todos</ion-select-option>
         <ion-select-option value="Passeio de Pets">Passeio de Pets</ion-select-option>
         <ion-select-option value="Tosa de Pets">Tosa de Pets</ion-select-option>
         <ion-select-option value="Banho de Pets">Banho de Pets</ion-select-option>

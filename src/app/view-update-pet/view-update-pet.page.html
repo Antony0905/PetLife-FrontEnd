@@ -14,7 +14,7 @@
   <ion-item *ngIf="petImage.base64 !== null">
     <ion-avatar
       style="margin:auto;margin-top: 7%;border: 2px solid #c5bdbd;width: 135px;height: 135px;border-radius: 27%;margin-bottom: 16%;">
-      <img style="width: 100%;height: 100%;border-radius: 27%;" src="{{petImage.base64}}">
+      <img style="width: 100%;height: 100%;border-radius: 26%;" src="{{petImage.base64}}">
       <ion-icon (click)="PickFileAndGetBase64String()" class="ion-camera" name="camera"></ion-icon>
     </ion-avatar>
   </ion-item>
@@ -22,7 +22,7 @@
   <ion-item *ngIf="petImage.base64 === null">
     <ion-avatar
       style="margin:auto;margin-top: 7%;border: 2px solid #c5bdbd;width: 135px;height: 135px;border-radius: 27%;margin-bottom: 16%;">
-      <img style="width: 100%;height: 100%;border-radius: 27%;" src="../../assets/imgs/pet-profile-default.jpg">
+      <img style="width: 100%;height: 100%;border-radius: 26%;" src="../../assets/imgs/pet-profile-default.jpg">
       <ion-icon (click)="PickFileAndGetBase64String()" class="ion-camera" name="camera"></ion-icon>
     </ion-avatar>
   </ion-item>

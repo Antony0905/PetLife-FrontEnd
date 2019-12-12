@@ -158,7 +158,8 @@
       </ion-radio-group>
     </ion-list>
 
-    <ion-button (click)="cadastrarAgenda()" expand="block">Contratar</ion-button>
+    <ion-button *ngIf="enableButton !== false" (click)="cadastrarAgenda()" expand="block">Contratar</ion-button>
+    <ion-button *ngIf="enableButton === false" (click)="cadastrarAgenda()" expand="block" disabled="true">Contratar</ion-button>
   </ion-card>
 
 </ion-content>

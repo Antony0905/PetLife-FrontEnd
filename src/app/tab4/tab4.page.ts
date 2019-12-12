@@ -16,6 +16,7 @@ import { Base64 } from '@ionic-native/base64/ngx';
 import { ImageService } from '../services/image.service';
 import { UserImage } from '../models/user.image';
 import { RouterPage } from '../services/abstract-router-page';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-tab4',
@@ -35,6 +36,7 @@ export class Tab4Page extends RouterPage implements OnDestroy {
   files: Observable<any[]>;
   userImage = new UserImage();
   userImageSave = new UserImage();
+  public atGroup: FormGroup;
 
   constructor(
     public navCtrl: NavController,
@@ -49,9 +51,34 @@ export class Tab4Page extends RouterPage implements OnDestroy {
     private filePath: FilePath,
     private base64: Base64,
     private imageService: ImageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private atBuilder: FormBuilder
+
   ) {
     super(router, route);
+    this.atGroup = this.atBuilder.group({
+
+      'nome': [this.usuario.nome],
+      'dataNascimento': [this.usuario.dataNascimento, Validators.compose([
+        Validators.required])],
+      'ddd': [this.usuario.ddd, Validators.compose([
+        Validators.required, Validators.maxLength(2)])],
+      'telefone': [this.usuario.telefone, Validators.compose([
+        Validators.required, Validators.maxLength(9)])],
+      'email': [this.usuario.email, Validators.compose([
+        Validators.required])],
+      'cep': [this.usuario.cep],
+      'logradouro': [this.usuario.logradouro, Validators.compose([
+        Validators.required])],
+      'numero': [this.usuario.numero, Validators.compose([
+        Validators.required])],
+      'Bairro': [this.usuario.bairro, Validators.compose([
+        Validators.required])],
+      'cidade': [this.usuario.cidade, Validators.compose([
+        Validators.required])],
+      'estado': [this.usuario.estado, Validators.compose([
+        Validators.required])]
+    })
   }
 
   onEnter() {

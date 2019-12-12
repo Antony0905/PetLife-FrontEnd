@@ -31,31 +31,35 @@ export class Tab1Page {
 
     console.log('Cidade e servico' + this.servico + this.cidade);
 
-    if (this.cidade === '' && this.servico === '') {
-      this.anuncioService.findAll().subscribe((response) => {
-        this.anuncios = response;
-        console.log(this.anuncios);
-      },
-        error => {
-          console.log(error);
-        });
-    } else {
+    if (!(this.cidade === 'Todos' && this.servico === '' || this.servico === 'Todos' && this.cidade === '')) {  
+      
+      if (this.cidade === '' && this.servico === '') {
+        this.anuncioService.findAll().subscribe((response) => {
+          this.anuncios = response;
+          console.log(this.anuncios);
+        },
+          error => {
+            console.log(error);
+          });
+      } else {
 
-      console.log('Entrou no filtro ' + this.servico + this.cidade);
-      this.anuncioService.findAllWithParameters(this.cidade, this.servico).subscribe(res => {
-        this.anuncios = res;
-        console.log(this.anuncios);
-      },
-        error => {
-          console.log(error);
-        });
+        console.log('Entrou no filtro ' + this.servico + this.cidade);
+        this.anuncioService.findAllWithParameters(this.cidade, this.servico).subscribe(res => {
+          this.anuncios = res;
+          console.log(this.anuncios);
+        },
+          error => {
+            console.log(error);
+          });
+          
+      }
     }
-
 
     this.usuarioService.findAllCities().subscribe(res => {
       this.cidades = res;
       console.log(this.cidades);
     });
+    
   }
 
   viewAnuncio(anuncio: Anuncio) {

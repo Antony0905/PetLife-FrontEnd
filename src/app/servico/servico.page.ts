@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AlertController, LoadingController, NavController } from '@ionic/angular';
+import * as moment from 'moment';
 import { Anuncio } from 'src/models/anuncio';
 import { UsuarioDTO } from 'src/models/usuario.dto';
 import { AnuncioService } from 'src/services/anuncio.service';
 import { UsuarioService } from 'src/services/usuario.service';
 import { AuthenticationService } from '../services/authentication.service';
-import { Router } from '@angular/router';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-servico',
@@ -22,9 +23,22 @@ export class ServicoPage implements OnInit {
     public loadingController: LoadingController,
     public authService: AuthenticationService,
     public usuarioService: UsuarioService,
-    public router: Router
-  ) {
+    public router: Router,
+    private ServicoBuilder: FormBuilder
 
+  ) {
+    this.ServicoGroup = this.ServicoBuilder.group({
+      'titulo': [this.anuncio.titulo, Validators.compose([
+        Validators.required
+      ])],
+      'descricao': [this.anuncio.descricao, Validators.compose([
+        Validators.required])],
+      'dias': [this.dias, Validators.compose([Validators.required])],
+      'h1': [this.anuncio.horario1, Validators.compose([
+        Validators.required])],
+      'h2': [this.anuncio.horario2, null],
+      'h3': [this.anuncio.horario3, null],
+    });
   }
 
   anuncio = new Anuncio();
@@ -32,6 +46,7 @@ export class ServicoPage implements OnInit {
   msgReturn: string;
   email: string;
   usuario: UsuarioDTO;
+  public ServicoGroup: FormGroup;
 
   public dias = [
     { val: 'Segunda', isChecked: false },

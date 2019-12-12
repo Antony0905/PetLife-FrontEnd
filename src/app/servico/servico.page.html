@@ -6,18 +6,18 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-toolbar color="tertiary">
-    <ion-title style="text-align: center;">Cadastrar Novo Serviço</ion-title>
+    <ion-title>Cadastrar Novo Serviço</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <img src="../../assets/imgs/servico.jpg" alt="logo">
 
-  <form>
+  <form [formGroup]="ServicoGroup">
     <ion-list>
       <ion-list-header>Single Selection</ion-list-header>
       <ion-item>
         <ion-label>Título</ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="anuncio.titulo" name="anuncio.titulo">
+        <ion-select placeholder="Select One" [(ngModel)]="anuncio.titulo" name="anuncio.titulo" formControlName="titulo">
           <ion-select-option value="1">Passeio de Pets</ion-select-option>
           <ion-select-option value="3">Banho de Pets</ion-select-option>
           <ion-select-option value="4">Tosa de Pets</ion-select-option>
@@ -27,7 +27,7 @@
 
     <ion-item>
       <ion-textarea rows="8" cols="20" type="text" [(ngModel)]="anuncio.descricao" name="descricao" required
-        placeholder="Descrição do Serviço"></ion-textarea>
+        placeholder="Descrição do Serviço" formControlName="descricao"></ion-textarea>
     </ion-item>
 
     <ion-list>
@@ -35,7 +35,7 @@
         <ion-label>Selecione os dias que possui disponibilidade</ion-label>
       </ion-list-header>
       <ion-item *ngFor="let dia of dias">
-        <ion-checkbox color="primary" [(ngModel)]="dia.isChecked" name="{{dia.val}}"></ion-checkbox>
+        <ion-checkbox color="primary" [(ngModel)]="dia.isChecked" name="{{dia.val}}" formControlName="dias"></ion-checkbox>
         <ion-label class="label-day">{{dia.val}}</ion-label>
       </ion-item>
     </ion-list>
@@ -46,15 +46,15 @@
 
       <ion-item>
         <ion-label>Primeiro Horário</ion-label>
-        <ion-datetime displayFormat="HH" [(ngModel)]="horario1" name="horario1"></ion-datetime> <span> Hrs</span>
+        <ion-datetime displayFormat="HH" [(ngModel)]="horario1" name="horario1" formControlName="h1"></ion-datetime> <span> Hrs</span>
       </ion-item>
       <ion-item>
         <ion-label>Segundo Horário</ion-label>
-        <ion-datetime displayFormat="HH" [(ngModel)]="horario2" name="horario2"></ion-datetime> Hrs
+        <ion-datetime displayFormat="HH" [(ngModel)]="horario2" name="horario2" formControlName="h2"></ion-datetime> Hrs
       </ion-item>
       <ion-item>
         <ion-label>Terceiro Horário</ion-label>
-        <ion-datetime displayFormat="HH" [(ngModel)]="horario3" name="horario3"></ion-datetime><span> Hrs</span>
+        <ion-datetime displayFormat="HH" [(ngModel)]="horario3" name="horario3" formControlName="h3"></ion-datetime><span> Hrs</span>
       </ion-item>
     </ion-list>
 
@@ -81,7 +81,7 @@
       </ion-radio-group>
     </ion-list>
 
-    <ion-button (click)="cadastrarAnuncio()" expand="block">Cadastrar</ion-button>
+    <ion-button (click)="cadastrarAnuncio()" expand="full"  [disabled]="!ServicoGroup.valid">Cadastrar</ion-button>
   </form>
 
 

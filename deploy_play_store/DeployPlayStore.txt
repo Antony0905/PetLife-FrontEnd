@@ -1,0 +1,14 @@
+ID do Desenvolvedor Play Store: 5823048106676280207
+
+cordova plataform add android
+ionic cordova build --release android
+
+keytool -genkey -v -keystore PetRun_KEYSTORE -alias PetRun_KEY -keyalg RSA -keysize 2048 -validity 10000
+
+cd C:\Users\mlealsou\Documents\06.FMU\FrontEnd\PetLife\platforms\android\app\build\outputs\apk\release
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore PetRun_KEYSTORE app-release-unsigned.apk PetRun_KEY
+
+password: 090596
+
+Passar o APK no ZipAling

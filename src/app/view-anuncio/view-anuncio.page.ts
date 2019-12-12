@@ -13,6 +13,7 @@ import { Pet } from '../models/pet';
 import { RouterPage } from '../services/abstract-router-page';
 import { WeekService } from '../services/week-service';
 import { Week } from '../models/week';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-view-anuncio',
@@ -34,6 +35,7 @@ export class ViewAnuncioPage extends RouterPage implements OnDestroy {
     private weekService: WeekService,
   ) {
     super(router, route);
+
   }
 
   anuncio = new Anuncio();
@@ -48,6 +50,7 @@ export class ViewAnuncioPage extends RouterPage implements OnDestroy {
   email;
   msgReturn;
   pets: Pet[];
+  enableButton = false;
 
   public disponibleDays: any[] = [
     { day: 'sunday', isActive: false, date: '' },
@@ -96,6 +99,9 @@ export class ViewAnuncioPage extends RouterPage implements OnDestroy {
       this.anuncio.horario3 = res.horario3;
       this.precoUnitario = res.preco;
       this.preco = res.preco;
+      this.agenda.horario = null;
+      this.agenda.petId = null;
+      this.agenda.formaPagamento = null;
 
       this.usuarioService.findUserById(this.anuncio.userId).subscribe((response3) => {
         this.usuarioAnunciante = response3;
@@ -148,19 +154,37 @@ export class ViewAnuncioPage extends RouterPage implements OnDestroy {
       this.count++;
     }
 
-    console.log(this.count);
+    this.checkValidation();
+
+  }
+
+  checkValidation() {
+    if ((this.disponibleDays[0].isActive !== false || this.disponibleDays[1].isActive !== false
+      || this.disponibleDays[2].isActive !== false || this.disponibleDays[3].isActive !== false
+      || this.disponibleDays[4].isActive !== false || this.disponibleDays[5].isActive !== false
+      || this.disponibleDays[6].isActive !== false) && (this.agenda.horario !== null)
+      && (this.agenda.petId !== null) && (this.agenda.formaPagamento !== null)) {
+      console.log(this.agenda.horario);
+      this.enableButton = true;
+    } else {
+      this.enableButton = false;
+    }
   }
 
   checkValue(event) {
     this.agenda.horario = event.detail.value;
+    this.checkValidation();
   }
 
   checkPet(event) {
     this.agenda.petId = event.detail.value;
+    this.checkValidation();
   }
 
   checkPayment(event) {
     this.agenda.formaPagamento = event.detail.value;
+    this.checkValidation();
+
   }
 
 
