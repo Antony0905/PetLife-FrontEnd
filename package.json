@@ -43,7 +43,7 @@
     "ionic-rating": "^2.0.0",
     "ionic3-star-rating": "^2.1.0",
     "ionic4-rating": "^1.0.9",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "rxjs": "^6.5.3",
     "rxjs-compat": "^6.5.3",
     "tslib": "^1.9.0",
